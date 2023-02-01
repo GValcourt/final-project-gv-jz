@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) by Gregory Valcourt.
 
-JS support has been turned off in order to play with HTML.
+Hosted at [https://gregarious-cajeta-1029f1.netlify.app/](https://gregarious-cajeta-1029f1.netlify.app/)
 
 ## Available Scripts
 
