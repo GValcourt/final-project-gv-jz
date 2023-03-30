@@ -5,6 +5,7 @@ import ArticleComponent from "./article"
 import ProfileComponent from "./profile"
 import EditProfileComponent from "./edit-profile"
 import SuggestedContentComponent from "./suggested-content-pane"
+import CreateArticleComponent from "./create-article";
 
 //main website functionality
 function Blog() {
@@ -21,6 +22,7 @@ function Blog() {
             <Route path="article"    element={<ArticleComponent/>}/>
             <Route path="profile" element={<ProfileComponent/>}/>
             <Route path="edit-profile" element={<EditProfileComponent/>}/>
+            <Route path="create-article" element={<CreateArticleComponent/>}/>
           </Routes>
         </div>
         <div className="d-none d-lg-block col-lg-4 col-xl-4">

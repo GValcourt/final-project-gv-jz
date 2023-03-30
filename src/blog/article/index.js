@@ -1,4 +1,5 @@
 //takes in a article id and renders that article
+import MapContainer from "../google-map"
 
 const ArticleComponent = ({article={
     "_posterid": 12345,
@@ -32,6 +33,10 @@ const ArticleComponent = ({article={
       consequat dictum ligula eu iaculis.",
       "image1":""
 }})=>{
+
+    const textArray = article.text.split('\n')
+    //console.log(textArray)
+
     return (
         <div className="container">
             <h1>
@@ -40,10 +45,21 @@ const ArticleComponent = ({article={
             <h2>
                 By {article._posterid} (will figure out how to replace with name later)
             </h2>
-                <image src={article.image1}></image>
-            <p>
-                {article.text}
-            </p>
+            <img src={article.image1} alt={"placeholder image text"}></img>
+            <div id="MapContainer" className="container">
+                <MapContainer/>
+            </div>
+            <div className="row">
+            {
+                textArray.map(words => {
+                    return(
+                        <p key={textArray.indexOf(words)}>
+                            {words}
+                        </p>
+                    )
+                } )
+            }
+            </div>
       </div>
       );
 }
