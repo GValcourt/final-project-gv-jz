@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 
 const containerStyle = {
     position: 'relative',  
-    width: '50vw',
-    height: '50vw'
-  }
+    width: '48vw',
+    height: '48vw'
+}
 
 const mapStyles = {
   width: '100%',
@@ -14,11 +14,20 @@ const mapStyles = {
 };
 
 export class MapContainer extends React.Component{
-    state = {
+  constructor (props) {
+    super(props)
+    this.location = props.location
+    this.state = {
       showingInfoWindow: false,  // Hides or shows the InfoWindow
       activeMarker: {},          // Shows the active marker upon click
       selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
     };
+  }
+  componentDidMount(){
+    this.onMarkerClick = this.onMarkerClick.bind(this)
+    this.onClose = this.onClose.bind(this);
+  }
+    
     onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
@@ -42,15 +51,15 @@ export class MapContainer extends React.Component{
         style={mapStyles}
         initialCenter={
           {
-            lat: -1.2884,
-            lng: 36.8233
+            lat: this.location.lat,
+            lng: this.location.long
           }
         }
         containerStyle={containerStyle}
       >
         <Marker
           onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
+          name={this.location.locationName}
         />
         <InfoWindow
           marker={this.state.activeMarker}
@@ -67,5 +76,5 @@ export class MapContainer extends React.Component{
 }
 
 export default GoogleApiWrapper((props) => ({
-    apiKey: process.env.GOOGLE_API_KEY
+    apiKey: "AIzaSyBq6A5uqteMK_iK8T-d8YlMFmCw3CyQCWA"
   }))(MapContainer);

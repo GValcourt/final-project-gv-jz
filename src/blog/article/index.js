@@ -1,4 +1,4 @@
-//takes in a article id and renders that article
+//takes in an article and renders it with a map
 import MapContainer from "../google-map"
 
 const ArticleComponent = ({article={
@@ -31,11 +31,30 @@ const ArticleComponent = ({article={
       vulputate ipsum. Integer suscipit ac eros consequat elementum. In gravida interdum magna, eget molestie nulla suscipit sed.\
       Etiam maximus odio et metus scelerisque porta. Vestibulum ornare ante mauris, et maximus tortor placerat sed. Curabitur\
       consequat dictum ligula eu iaculis.",
-      "image1":""
+      "image1":"",
+      "location":{
+        locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
+        lat: 43.6615206,
+        long: -70.2466249
+      }
 }})=>{
 
     const textArray = article.text.split('\n')
     //console.log(textArray)
+
+    const renderArray = textArray.map(words => {
+        return(
+            <p key={textArray.indexOf(words)}>
+                {words}
+            </p>
+        )
+    } )
+
+    const ImageItem = (image) =>{return(
+        <img key={image} src={`${image}`} alt={`${image} placeholder`}></img>
+    )}
+
+    renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs
 
     return (
         <div className="container">
@@ -45,19 +64,12 @@ const ArticleComponent = ({article={
             <h2>
                 By {article._posterid} (will figure out how to replace with name later)
             </h2>
-            <img src={article.image1} alt={"placeholder image text"}></img>
             <div id="MapContainer" className="container">
-                <MapContainer/>
+                <MapContainer location={article.location}/>
             </div>
             <div className="row">
             {
-                textArray.map(words => {
-                    return(
-                        <p key={textArray.indexOf(words)}>
-                            {words}
-                        </p>
-                    )
-                } )
+                renderArray
             }
             </div>
       </div>
