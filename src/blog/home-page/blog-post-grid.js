@@ -27,7 +27,7 @@ function PostGrid() {
             </div>
             <div className="col-md-4">
                 <div className="card">
-                    <img className="card-img-top" src="./public/images/portland-harbor-hotel.jpeg" alt="Portland Harbor Hotel"/>
+                    <img className="card-img-top" src="./images/portland-harbor-hotel.jpeg" alt="Portland Harbor Hotel"/>
                         <div className="card-body">
                             <h5 className="card-title">Blog Post 3</h5>
                             <p className="card-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris

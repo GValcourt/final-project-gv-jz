@@ -14,12 +14,15 @@ function HomeComponent(){
                 <div className="row">
                     {/* Nav and search bar */}
                 </div>
+                <div className="jumbotron">
+                    <h1 className="display-4">Book It</h1>
+                    <p className="lead">Hotel reviews for the modern nomad.</p>
+                    <hr className="my-4"></hr>
+                        <p className="lead">
+                            <a className="btn btn-primary btn-lg" href="#" role="button">Read more</a>
+                        </p>
+                </div>
                 <div className="container">
-                    <div className="jumbotron">
-                        <h1>Book It</h1>
-                        <p>Hotel reviews for the modern nomad</p>
-                        <a className="btn btn-primary btn-lg" href="#" role="button">Read More</a>
-                    </div>
                     <div className="row">
                         <PostGrid/>
                     </div>
