@@ -1,6 +1,8 @@
 //takes in an article and renders it with a map
 import MapContainer from "../google-map"
 
+//TODO: add a comments footer that requires logged in state
+
 const ArticleComponent = ({article={
     "_posterid": 12345,
       "_postid": 12345,
@@ -54,7 +56,7 @@ const ArticleComponent = ({article={
         <img key={image} src={`${image}`} alt={`${image} placeholder`}></img>
     )}
 
-    renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs
+    renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
 
     return (
         <div className="container">

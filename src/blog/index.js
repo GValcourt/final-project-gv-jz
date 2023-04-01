@@ -19,7 +19,7 @@ function Blog() {
           <Routes>
             <Route path=""    element={<HomeComponent/>}/>
             <Route path="home"    element={<HomeComponent/>}/>
-            <Route path="article"    element={<ArticleComponent/>}/>
+            <Route path="article/*"    element={<ArticleComponent/>}/>
             <Route path="profile" element={<ProfileComponent/>}/>
             <Route path="edit-profile" element={<EditProfileComponent/>}/>
             <Route path="create-article" element={<CreateArticleComponent/>}/>
