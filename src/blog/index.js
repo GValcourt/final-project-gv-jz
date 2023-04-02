@@ -6,10 +6,18 @@ import ProfileComponent from "./profile"
 import EditProfileComponent from "./edit-profile"
 import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
+import articleReducer from "./reducers/article-reducer.js"
+import {Provider} from "react-redux";
+import { configureStore }
+  from '@reduxjs/toolkit';
+const store = configureStore(
+  {reducer: {articles: articleReducer}});
+
 
 //main website functionality
 function Blog() {
-    return (
+  return (
+      <Provider store={store}>
       <div className="row mt-2">
         <div className="col-2 col-md-2 col-lg-1 col-xl-2">
           <NavigationSidebar active="explore"/>
@@ -29,6 +37,7 @@ function Blog() {
           <SuggestedContentComponent/>
         </div>
     </div>
+    </Provider>
     );
    }
 

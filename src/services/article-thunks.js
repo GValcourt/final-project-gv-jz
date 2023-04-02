@@ -1,7 +1,12 @@
 import {createAsyncThunk}
   from "@reduxjs/toolkit"
 import * as service
-  from "./articles-service"
+  from "./article-service"
+
+export const checkLocationThunk = createAsyncThunk(
+    'articles/checkLocation', async (location) =>
+      await service.checkLocation(location)
+)
 
 export const findArticlesThunk = createAsyncThunk(
   'articles/findArticles', async () =>
