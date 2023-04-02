@@ -30,8 +30,7 @@ const articleSlice = createSlice({
       (state, { payload }) => {
          state.loading = false
          //console.log(payload)
-         const addressValid = "formatted_address" in payload
-         addressValid ? alert("This is a valid address"): alert("This was not a valid address")
+         alert(`Address saved as: ${payload.formatted_address}`)
    },
    [checkLocationThunk.rejected]:
       (state, action) => {
