@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState} from "react";
 import {Link} from "react-router-dom";
-import { createArticleThunk, checkLocationThunk } from "../../services/article-thunks";
+import { createArticleThunk} from "../../services/article-thunks";
+import { checkLocationThunk } from "../../services/search-thunk";
 import {useDispatch}
   from "react-redux";
-
-
   //TODO: require being logged in so that poster id can be saved
 
 const CreateArticleComponent = ()=>{
+    const [search, setSearch] = useState('');
+    const [results, setResults] = useState([]);
     const dispatch = useDispatch();
     const createArticle = (newArticle) => {
         dispatch(createArticleThunk(newArticle))}
-    const checkLocation = (location) => {
-        dispatch(checkLocationThunk(location))
+    const checkLocation = async () => {
+        console.log(search);
+        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults(result.payload.candidates)});
     }
 
     return (
@@ -41,24 +43,27 @@ const CreateArticleComponent = ()=>{
                     <label htmlFor="title">Article Title</label>
                     <br></br>
                     <input id="title"
-                    defaultValue={'Article Title'}/></li>
+                        defaultValue={'Article Title'}/></li>
                 <li className="list-group-item">
                     <label htmlFor="article_text">Article Text</label>
                     <br></br>
                     <textarea id="article_text" cols="50" rows="50"
-                    defaultValue={'Text of the article'}/></li>
+                        defaultValue={'Text of the article'}/></li>
                 <li className="list-group-item">
                     <label htmlFor="image_upload">Article Image</label>
                     <br></br>
                     <input id="image_upload" type="file"/></li>
                 <li className="list-group-item">
-                    <label htmlFor="location_string">Location</label>
+                    <label htmlFor="location_string">Location (Be as specific as possible)</label>
                     <br></br>
                     <input id="location_string"
-                    defaultValue={''}/>
+                        value={search} onChange={(e) => setSearch(e.target.value)}/>
                     <button className="rounded-pill border-1 bg-black border-white text-white" type='button'
-                    onClick={(e) => checkLocation({locationName : `${document.getElementById('location_string').value}`})}>Check Location</button><br></br>
-                    </li>
+                        onClick={(e) => checkLocation()}>Check Location</button><br></br>
+                    <ul>
+                        {results.map(location => <li key={location.place_id}>{location.formatted_address}</li>)}
+                    </ul>
+                </li>
             </form>
       </div>
       );
