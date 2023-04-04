@@ -1,14 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import { createArticleThunk, checkLocationThunk } from "../../services/article-thunks";
-import {useDispatch, useSelector}
+import {useDispatch}
   from "react-redux";
 
 
   //TODO: require being logged in so that poster id can be saved
 
 const CreateArticleComponent = ()=>{
-    const tempLocation = useSelector(state => state.tempLocation);
     const dispatch = useDispatch();
     const createArticle = (newArticle) => {
         dispatch(createArticleThunk(newArticle))}
@@ -59,7 +58,7 @@ const CreateArticleComponent = ()=>{
                     defaultValue={''}/>
                     <button className="rounded-pill border-1 bg-black border-white text-white" type='button'
                     onClick={(e) => checkLocation({locationName : `${document.getElementById('location_string').value}`})}>Check Location</button><br></br>
-                    {tempLocation}</li>
+                    </li>
             </form>
       </div>
       );

@@ -3,7 +3,7 @@
 
 function SearchComponent(){
     return (
-        <div>
+        <div className="container">
             SearchComponent
       </div>
       );
