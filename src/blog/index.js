@@ -6,11 +6,11 @@ import ProfileComponent from "./profile"
 import EditProfileComponent from "./edit-profile"
 import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
+import SearchComponent from "./search/index.js";
 import articleReducer from "./reducers/article-reducer.js"
 import {Provider} from "react-redux";
 import { configureStore }
   from '@reduxjs/toolkit';
-import SearchComponent from "./search";
 const store = configureStore(
   {reducer: {articles: articleReducer}});
 
@@ -32,6 +32,7 @@ function Blog() {
             <Route path="profile" element={<ProfileComponent/>}/>
             <Route path="edit-profile" element={<EditProfileComponent/>}/>
             <Route path="create-article" element={<CreateArticleComponent/>}/>
+            <Route path="search" element={<SearchComponent/>}/>
             <Route path="search/:params" element={<SearchComponent/>}/>
           </Routes>
         </div>
