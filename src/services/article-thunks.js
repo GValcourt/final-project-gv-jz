@@ -3,11 +3,6 @@ import {createAsyncThunk}
 import * as service
   from "./article-service"
 
-export const checkLocationThunk = createAsyncThunk(
-    'articles/checkLocation', async (location) =>
-      await service.checkLocation(location)
-)
-
 export const findArticlesThunk = createAsyncThunk(
   'articles/findArticles', async () =>
     await service.findArticles()
