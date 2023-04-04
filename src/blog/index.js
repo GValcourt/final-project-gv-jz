@@ -10,6 +10,7 @@ import articleReducer from "./reducers/article-reducer.js"
 import {Provider} from "react-redux";
 import { configureStore }
   from '@reduxjs/toolkit';
+import SearchComponent from "./search";
 const store = configureStore(
   {reducer: {articles: articleReducer}});
 
@@ -27,10 +28,11 @@ function Blog() {
           <Routes>
             <Route path=""    element={<HomeComponent/>}/>
             <Route path="home"    element={<HomeComponent/>}/>
-            <Route path="article/*"    element={<ArticleComponent/>}/>
+            <Route path="article/:id"    element={<ArticleComponent/>}/>
             <Route path="profile" element={<ProfileComponent/>}/>
             <Route path="edit-profile" element={<EditProfileComponent/>}/>
             <Route path="create-article" element={<CreateArticleComponent/>}/>
+            <Route path="search/:params" element={<SearchComponent/>}/>
           </Routes>
         </div>
         <div className="d-none d-lg-block col-lg-4 col-xl-4">
