@@ -12,3 +12,8 @@ export const getLocationCandidatesThunk = createAsyncThunk(
     'places/locationCandidates', async (location) =>
       await service.getLocationCandidates(location)
 )
+
+export const getPlaceDetailsThunk = createAsyncThunk(
+  'places/locationCandidates', async (uid) =>
+    await service.getPlaceDetails(uid)
+)

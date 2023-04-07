@@ -32,7 +32,7 @@ const SearchComponent = ()=>{
                 </div>
             </div>
             <h1>
-                Create Article
+                Search for hotels
             </h1>
                 <label htmlFor="location_string">Location</label>
                 <br></br>
@@ -41,7 +41,8 @@ const SearchComponent = ()=>{
                 <button className="rounded-pill border-1 bg-black border-white text-white" type='button'
                     onClick={(e) => {getLocationOptions()}}>Check Location</button><br></br>
                 <ul>
-                    {results.map(location => <li key={location.place_id}>{location.formatted_address}</li>)}
+                    {results.map(location => <li key={location.place_id}>
+                        <Link to={`/location/${location.place_id}`}>{location.name}</Link></li>)}
                 </ul>
       </div>
       );

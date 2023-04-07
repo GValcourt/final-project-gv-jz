@@ -8,6 +8,7 @@ import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
 import SearchComponent from "./search/index.js";
 import articleReducer from "./reducers/article-reducer.js"
+import LocationComponent from "./location";
 import {Provider} from "react-redux";
 import { configureStore }
   from '@reduxjs/toolkit';
@@ -34,6 +35,7 @@ function Blog() {
             <Route path="create-article" element={<CreateArticleComponent/>}/>
             <Route path="search" element={<SearchComponent/>}/>
             <Route path="search/:params" element={<SearchComponent/>}/>
+            <Route path="location/:params" element={<LocationComponent/>}/>
           </Routes>
         </div>
         <div className="d-none d-lg-block col-lg-4 col-xl-4">
