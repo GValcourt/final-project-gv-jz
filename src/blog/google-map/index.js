@@ -52,7 +52,7 @@ export class MapContainer extends React.Component{
         initialCenter={
           {
             lat: this.location.lat,
-            lng: this.location.long
+            lng: this.location.lng
           }
         }
         containerStyle={containerStyle}

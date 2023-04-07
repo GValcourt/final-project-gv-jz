@@ -1,5 +1,5 @@
 //takes in an article and renders it with a map
-import MapContainer from "../google-map"
+import MapContainer from "../google-map/index.js"
 
 
 //TODO: add a comments footer that requires logged in state
@@ -38,7 +38,7 @@ const ArticleSection = ({article={
       "location":{
         locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
         lat: 43.6615206,
-        long: -70.2466249
+        lng: -70.2466249
       }
 }})=>{
 
