@@ -1,5 +1,5 @@
 //takes in an article and renders it with a map
-import MapContainer from "../google-map/index.js"
+import { Link } from "react-router-dom"
 
 
 //TODO: add a comments footer that requires logged in state
@@ -35,11 +35,12 @@ const ArticleSection = ({article={
       Etiam maximus odio et metus scelerisque porta. Vestibulum ornare ante mauris, et maximus tortor placerat sed. Curabitur\
       consequat dictum ligula eu iaculis.",
       "image1":"",
-      "location":{
+      "location":[{
         locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
         lat: 43.6615206,
-        lng: -70.2466249
-      }
+        lng: -70.2466249,
+        placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
+        }]
 }})=>{
 
     const textArray = article.text.split('\n')
@@ -67,9 +68,16 @@ const ArticleSection = ({article={
             <h2>
                 By {article._posterid} (will figure out how to replace with name later)
             </h2>
-            <div id="MapContainer" className="container">
-                <MapContainer location={article.location}/>
-            </div>
+            <h4>
+                Posted: {article.date}
+            </h4>
+            <h6>
+                Places referenced:
+                <ul>
+                    {article.location.map(places => <li key={places.placeID}>
+                            <Link to={`/location/${places.placeID}`}>{places.locationName}</Link></li>)}
+                </ul>
+            </h6>
             <div className="row">
             {
                 renderArray

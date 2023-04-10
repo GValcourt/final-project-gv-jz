@@ -31,7 +31,9 @@ const CreateArticleComponent = ()=>{
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
                   image1: document.getElementById('image_upload').value,
-                  location: {locationName : `${document.getElementById('location_string').value}`}})}>Save</button>
+                  location: {locationName : results[0].name,
+                  lat: results[0].geometry.location.lat, lng:results[0].geometry.location.lng,
+                  place_id: results[0].place_id}})}>Save</button>
                 </Link>
                 </div>
             </div>
@@ -62,6 +64,7 @@ const CreateArticleComponent = ()=>{
                         onClick={(e) => checkLocation()}>Check Location</button><br></br>
                     <ul>
                         {results.map(location => <li key={location.place_id}>{location.formatted_address}</li>)}
+                        {console.log(results)}
                     </ul>
                 </li>
             </form>
