@@ -8,7 +8,7 @@ import {useDispatch}
   from "react-redux";
 import MapContainer from "../google-map";
 
-//TODO: implement map container and have it actually load
+//TODO: add call to get articles with location string referenced in them
 
 
 function LocationComponent(){
@@ -16,6 +16,7 @@ function LocationComponent(){
     //console.log(searchID)
     const [results, setResults] = useState({});
     const [map, makeMap] = useState(<></>)
+    const [articles, setArticles] = useState([])
     const dispatch = useDispatch();
     const getDetails = async () => {
         await dispatch(getPlaceDetailsThunk(searchID)).then(result => {/*console.log(result.payload.result);*/ setResults(result.payload.result);
