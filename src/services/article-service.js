@@ -8,14 +8,14 @@ export const createArticle = async (article) => {
     return response.data;
 }
 
-export const findArticles = async () => {
+export const getArticles = async () => {
     const response = await axios.get(BLOG_API);
     //console.log(response)
     const articles = response.data;
     return articles;
 }
 
-export const findArticle = async (aid) => {
+export const findArticlebyAID = async (aid) => {
     const response = await axios.get(`${BLOG_API}/${aid}`);
     //console.log(response)
     const article = response.data;

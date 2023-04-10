@@ -4,13 +4,13 @@ import * as service
   from "./article-service"
 
 export const findArticlesThunk = createAsyncThunk(
-  'articles/findArticles', async () =>
-    await service.findArticles()
+  'articles/getArticles', async () =>
+    await service.getArticles()
 )
 
 export const findArticleByAidThunk = createAsyncThunk(
     'articles/findArticles', async (articleId) =>{
-        await service.findArticles(articleId)
+        await service.findArticlebyAID(articleId)
     }
 )
 
