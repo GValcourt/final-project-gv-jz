@@ -4,8 +4,8 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 const containerStyle = {
     position: 'relative',  
-    width: '48vw',
-    height: '48vw'
+    width: '30vw',
+    height: '30vw'
 }
 
 const mapStyles = {
