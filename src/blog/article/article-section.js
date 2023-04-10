@@ -37,8 +37,6 @@ const ArticleSection = ({article={
       "image1":"",
       "location":[{
         locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
-        lat: 43.6615206,
-        lng: -70.2466249,
         placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
         }]
 }})=>{
@@ -53,9 +51,9 @@ const ArticleSection = ({article={
             </p>
         )
     } )
-
+    //Store images in Flickr
     const ImageItem = (image) =>{return(
-        <img key={image} src={`${image}`} alt={`${image} placeholder`}></img>
+        <img key={image} src={`public/images/${image}`} alt={`${image} placeholder`}></img>
     )}
 
     renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
