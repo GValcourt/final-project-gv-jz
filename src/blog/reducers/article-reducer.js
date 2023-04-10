@@ -1,6 +1,6 @@
 import {createSlice}
   from "@reduxjs/toolkit";
-import {findArticlesThunk} from "../../services/article-thunks.js";
+import {findArticlesThunk, findArticlebyLocationThunk} from "../../services/article-thunks.js";
 
 const initialState = {
    articles: [],
@@ -22,6 +22,19 @@ const articleSlice = createSlice({
          state.articles = payload
    },
    [findArticlesThunk.rejected]:
+      (state, action) => {
+         state.loading = false
+         state.error = action.error
+   },
+   [findArticlebyLocationThunk.fulfilled]:
+      (state) => {
+         state.loading = false
+   },
+   [findArticlebyLocationThunk.pending]:
+      (state) => {
+         state.loading = true
+   },
+   [findArticlebyLocationThunk.rejected]:
       (state, action) => {
          state.loading = false
          state.error = action.error

@@ -22,6 +22,21 @@ export const findArticlebyAID = async (aid) => {
     return article;
 }
 
+export const findArticlebyPred = async (pred, value) => {
+    const response = await axios.get(`${BLOG_API}/pred/${pred}/${value}`);
+    const articles = response.data
+    //console.log(articles)
+    return articles;
+}
+
+export const findArticlebyLocation = async (place_id) => {
+    const response = await axios.get(`${BLOG_API}/byplace/${place_id}`);
+    //console.log(place_id)
+    const articles = response.data
+    //console.log(articles)
+    return articles;
+}
+
 export const deleteArticle = async (aid) => {
     const response = await axios
       .delete(`${BLOG_API}/${aid}`)

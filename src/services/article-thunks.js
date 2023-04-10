@@ -14,6 +14,20 @@ export const findArticleByAidThunk = createAsyncThunk(
     }
 )
 
+export const findArticlebyPredThunk = createAsyncThunk(
+  'articles/getArticlesbyPred', async (pred, value) =>{
+    let articles = await service.findArticlebyPred(pred, value)
+    return articles
+  }
+)
+
+export const findArticlebyLocationThunk = createAsyncThunk(
+  'articles/findArticlebyLocation', async (place_id) =>{
+      let articles = await service.findArticlebyLocation(place_id)
+      return articles
+  }
+)
+
 export const deleteArticleThunk = createAsyncThunk(
   'articles/deleteArticle',
   async (articleId) => {

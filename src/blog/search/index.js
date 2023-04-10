@@ -32,7 +32,7 @@ const SearchComponent = ()=>{
                 </div>
             </div>
             <h1>
-                Search for hotels
+                Search for locations
             </h1>
                 <label htmlFor="location_string">Location</label>
                 <br></br>

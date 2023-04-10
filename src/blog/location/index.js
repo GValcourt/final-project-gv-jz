@@ -2,26 +2,29 @@
 //based on a given place id, display results
 
 import React, { useState, useEffect } from "react";
-import {Link, useParams, useNavigate} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { getPlaceDetailsThunk } from "../../services/search-thunk";
-import {useDispatch}
+import { findArticlebyLocationThunk } from "../../services/article-thunks";
+import {useDispatch, useSelector}
   from "react-redux";
 import MapContainer from "../google-map";
 
-//TODO: add call to get articles with location string referenced in them
+//TODO: add handling of loggedin state
 
 
 function LocationComponent(){
-    const searchID= useParams().params;
-    //console.log(searchID)
+    const searchID = useParams().params;
+    const {loading} = useSelector((state) => state.articles)
+    //console.log(loading)
     const [results, setResults] = useState({});
     const [map, makeMap] = useState(<></>)
     const [articles, setArticles] = useState([])
     const dispatch = useDispatch();
     const getDetails = async () => {
-        await dispatch(getPlaceDetailsThunk(searchID)).then(result => {/*console.log(result.payload.result);*/ setResults(result.payload.result);
+        await dispatch(getPlaceDetailsThunk(searchID)).then(result => {console.log(result.payload.result); setResults(result.payload.result);
                         makeMap(<MapContainer location={{locationName:result.payload.result.name, lat:result.payload.result.geometry.location.lat,
                             lng: result.payload.result.geometry.location.lng}}/>)});
+        await dispatch(findArticlebyLocationThunk(searchID)).then(result => {console.log(result.payload); setArticles(result.payload)});
     }
     useEffect(() => {
         getDetails();
@@ -36,6 +39,34 @@ function LocationComponent(){
                 {results.vicinity}
             </p>
             {map}
+            <p>
+                <b>Location Summary:</b> {results.editorial_summary !== undefined ?results.editorial_summary.overview:'No summary provided'}
+            </p>
+            {
+            loading &&
+            <li className="list-group-item">
+                Loading...
+            </li>
+            }
+            {
+            (articles.length > 0 && loading===false)?
+                <div>
+                    <h4>
+                        Articles connected to this location:
+                    </h4>
+                    <ul>
+                        {articles.map(article => <li key={article._postid} className="list-group-item">
+                            <Link to={`/article/${article._postid}`}>{article.title}</Link></li>)}
+                    </ul>
+                </div>
+            :
+            <div>
+                <h4>
+                    No articles are connected to this place
+                </h4>
+            </div>
+            }
+            
       </div>
       );
 }
