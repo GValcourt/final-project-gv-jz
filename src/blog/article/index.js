@@ -1,25 +1,28 @@
 //takes in an article and renders it with a map
 import { useParams } from "react-router"
-import { useSelector, useDispatch } from "react-redux"
-import { findArticlesThunk } from "../../services/article-thunks"
-import { useEffect } from "react"
+import {useDispatch } from "react-redux"
+import {findArticleByAidThunk } from "../../services/article-thunks"
+import { useEffect, useState } from "react"
 import ArticleSection from "./article-section"
 
 //TODO: add a comments footer that requires logged in state
 
 const ArticleComponent = ()=>{
 
-    const aid = parseInt(useParams().id)
-    //console.log(aid)
-    //may find a better way to do this
+    const aid = useParams().id
     const dispatch = useDispatch();
-    useEffect(() => {dispatch(findArticlesThunk());}, [dispatch]);
-    //console.log(useSelector(state => state.articles).articles.find((article) => article._postid === aid))
-    const article = useSelector(state => state.articles).articles.find((article) => article._postid === aid)
+    const [article, setArticle] = useState({})
+    async function getData(){
+        await dispatch(findArticleByAidThunk(aid)).then(result => {setArticle(result.payload); console.log(result.payload)});
+    }
+    useEffect(() => {
+        getData();
+        }, []);
 
     return (
         <div className="container">
             <ArticleSection article={article}/>
+
       </div>
       );
 }

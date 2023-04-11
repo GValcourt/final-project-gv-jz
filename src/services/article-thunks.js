@@ -9,8 +9,10 @@ export const findArticlesThunk = createAsyncThunk(
 )
 
 export const findArticleByAidThunk = createAsyncThunk(
-    'articles/findArticles', async (articleId) =>{
-        await service.findArticlebyAID(articleId)
+    'articles/findArticlesByAid', async (articleId) =>{
+        let article = await service.findArticlebyAID(articleId)
+        //console.log(article)
+        return article
     }
 )
 

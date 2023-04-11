@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 //TODO: add a comments footer that requires logged in state
 
 const ArticleSection = ({article={
-    "_posterid": 12345,
-      "_postid": 12345,
+    "_posterid": "12345",
+      "_postid": "12345",
       "title": "My Galvant Around New York",
       "text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porta urna sed ante molestie elementum id a mauris.\
       Aenean consequat malesuada pharetra. Nunc at metus lectus. Fusce ultrices orci eu libero bibendum, eget auctor sem eleifend.\
@@ -40,47 +40,64 @@ const ArticleSection = ({article={
         placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
         }]
 }})=>{
+    function isEmpty(obj) {
+        //helper function to check if article is empty
+        return Object.keys(obj).length === 0;
+    }
+    //console.log(isEmpty(article))
+    function createParagraphs(article){
+        let renderArray = [];
+        if (!isEmpty(article)){
 
-    const textArray = article.text.split('\n')
-    //console.log(textArray)
-
-    const renderArray = textArray.map(words => {
-        return(
-            <p key={textArray.indexOf(words)}>
-                {words}
-            </p>
-        )
-    } )
-    //Store images in Flickr
-    const ImageItem = (image) =>{return(
-        <img key={image} src={`public/images/${image}`} alt={`${image} placeholder`}></img>
-    )}
-
-    renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
-
+            const textArray = article.text.split('\n')
+            //console.log(textArray)
+            
+            renderArray = textArray.map(words => {
+                return(
+                    <p key={textArray.indexOf(words)}>
+                    {words}
+                </p>
+            )
+        } )
+        //Store images in Flickr
+        const ImageItem = (image) =>{return(
+            <img key={image} src={`public/images/${image}`} alt={`${image} placeholder`}></img>
+            )}
+            
+            renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
+            
+        }
+        //console.log(renderArray)
+        return renderArray;
+    }
+    let renderArray = createParagraphs(article)
     return (
         <div className="container">
-            <h1>
-                {article.title}
-            </h1>
-            <h2>
-                By {article._posterid} (will figure out how to replace with name later)
-            </h2>
-            <h4>
-                Posted: {article.date}
-            </h4>
-            <h6>
-                Places referenced:
-                <ul>
-                    {article.location.map(places => <li key={places.placeID}>
-                            <Link to={`/location/${places.placeID}`}>{places.locationName}</Link></li>)}
-                </ul>
-            </h6>
-            <div className="row">
-            {
-                renderArray
-            }
-            </div>
+            {!isEmpty(article)?<div>
+                <h1>
+                    {article.title}
+                </h1>
+                <h2>
+                    By {article._posterid} (will figure out how to replace with name later)
+                </h2>
+                <h4>
+                    Posted: {article.date}
+                </h4>
+                <h6>
+                    Places referenced:
+                    <ul>
+                        {article.location.map(places => <li key={places.placeID}>
+                                <Link to={`/location/${places.placeID}`}>{places.locationName}</Link></li>)}
+                    </ul>
+                </h6>
+                <div className="row">
+                {
+                    renderArray
+                }
+                </div>
+                </div>
+            :
+            "Loading"}
       </div>
       );
 }
