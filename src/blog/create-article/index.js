@@ -4,7 +4,9 @@ import { createArticleThunk} from "../../services/article-thunks";
 import { checkLocationThunk } from "../../services/search-thunk";
 import {useDispatch}
   from "react-redux";
+
   //TODO: require being logged in so that poster id can be saved
+  //TODO: allow multiple images to be saved
 
 const CreateArticleComponent = ()=>{
     const [search, setSearch] = useState('');
@@ -13,8 +15,14 @@ const CreateArticleComponent = ()=>{
     const createArticle = (newArticle) => {
         dispatch(createArticleThunk(newArticle))}
     const checkLocation = async () => {
-        console.log(search);
-        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults(result.payload.candidates)});
+        //console.log(search);
+        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates])});
+    }
+    function removeResultfromState(place_id){
+        setResults(results.filter(location => location.place_id !== place_id))
+    }
+    function justSaveNeededStuff (location){
+        return {locationName : location.name, placeID : location.place_id}
     }
 
     return (
@@ -28,12 +36,11 @@ const CreateArticleComponent = ()=>{
                 <Link to="/">
                 <button className="rounded-pill border-1 bg-black border-white text-white"
               form="article_form" onClick={(e) => createArticle({
+                  _posterid : "312",
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
-                  image1: document.getElementById('image_upload').value,
-                  location: {locationName : results[0].name,
-                  lat: results[0].geometry.location.lat, lng:results[0].geometry.location.lng,
-                  place_id: results[0].place_id}})}>Save</button>
+                  image1: "",
+                  location: results.map(justSaveNeededStuff)})}>Save</button>
                 </Link>
                 </div>
             </div>
@@ -63,8 +70,12 @@ const CreateArticleComponent = ()=>{
                     <button className="rounded-pill border-1 bg-black border-white text-white" type='button'
                         onClick={(e) => checkLocation()}>Check Location</button><br></br>
                     <ul>
-                        {results.map(location => <li key={location.place_id}>{location.formatted_address}</li>)}
-                        {console.log(results)}
+                        {results.map(location => <li key={location.place_id}>
+                            <h6>{location.name}</h6>
+                            <p>{location.formatted_address}</p>
+                            <button onClick={(e)=>{removeResultfromState(location.place_id)}}>
+                                Delete</button></li>)}
+                        {/*console.log(results)*/}
                     </ul>
                 </li>
             </form>
