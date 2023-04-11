@@ -40,7 +40,8 @@ function LocationComponent(){
             </p>
             {map}
             <p>
-                <b>Location Summary:</b> {results.editorial_summary !== undefined ?results.editorial_summary.overview:'No summary provided'}
+                <b>Location Summary:</b> {results.editorial_summary !== undefined ?
+                results.editorial_summary.overview:'No summary provided by Google'}
             </p>
             {
             loading &&
