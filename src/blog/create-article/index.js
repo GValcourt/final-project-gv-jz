@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import {Link} from "react-router-dom";
 import { createArticleThunk} from "../../services/article-thunks";
 import { checkLocationThunk } from "../../services/search-thunk";
+import { postImageThunk } from "../../services/image-thunk";
 import {useDispatch}
   from "react-redux";
 
@@ -16,7 +17,8 @@ const CreateArticleComponent = ()=>{
         dispatch(createArticleThunk(newArticle))}
     const checkLocation = async () => {
         //console.log(search);
-        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates])});
+        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates]); console.log(result)
+        });
     }
     function removeResultfromState(place_id){
         setResults(results.filter(location => location.place_id !== place_id))
@@ -24,23 +26,31 @@ const CreateArticleComponent = ()=>{
     function justSaveNeededStuff (location){
         return {locationName : location.name, placeID : location.place_id}
     }
+    function postAllImages(files){
+        for (let item = 0; item<files.length; item++){
+            //console.log(files[item])
+            dispatch(postImageThunk(files[item]))
+        }
+    }
 
     return (
         <div className="container">
             <div className="row" style={{width:'100%'}}>
 
                 <div className="col float-left">
-                <Link to="/"><button className="border-0 bg-white" type="reset" form="article_form">X</button></Link>
+                <Link to="/profile"><button className="border-0 bg-white" type="reset" form="article_form">X</button></Link>
                 </div>
                 <div className="col-4 float-right">
-                <Link to="/">
+                <Link to="/profile">
                 <button className="rounded-pill border-1 bg-black border-white text-white"
-              form="article_form" onClick={(e) => createArticle({
+              form="article_form" onClick={(e) => {createArticle({
                   _posterid : "312",
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
                   image1: "",
-                  location: results.map(justSaveNeededStuff)})}>Save</button>
+                  location: results.map(justSaveNeededStuff)});
+                  //console.log(document.getElementById("image_upload").files);
+                  postAllImages(document.getElementById("image_upload").files)}}>Save</button>
                 </Link>
                 </div>
             </div>
@@ -61,7 +71,7 @@ const CreateArticleComponent = ()=>{
                 <li className="list-group-item">
                     <label htmlFor="image_upload">Article Image</label>
                     <br></br>
-                    <input id="image_upload" type="file"/></li>
+                    <input id="image_upload" type="file" multiple={true}/></li>
                 <li className="list-group-item">
                     <label htmlFor="location_string">Location (Be as specific as possible)</label>
                     <br></br>

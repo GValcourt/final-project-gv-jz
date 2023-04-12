@@ -13,7 +13,8 @@ const ArticleComponent = ()=>{
     const dispatch = useDispatch();
     const [article, setArticle] = useState({})
     async function getData(){
-        await dispatch(findArticleByAidThunk(aid)).then(result => {setArticle(result.payload); console.log(result.payload)});
+        await dispatch(findArticleByAidThunk(aid)).then(result => {setArticle(result.payload); //console.log(result.payload)
+        });
     }
     useEffect(() => {
         getData();

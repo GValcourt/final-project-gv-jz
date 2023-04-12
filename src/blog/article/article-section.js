@@ -1,5 +1,7 @@
 //takes in an article and renders it with a map
 import { Link } from "react-router-dom"
+import {useDispatch } from "react-redux"
+import { getImageThunk } from "../../services/image-thunk";
 
 
 //TODO: add a comments footer that requires logged in state
@@ -34,12 +36,21 @@ const ArticleSection = ({article={
       vulputate ipsum. Integer suscipit ac eros consequat elementum. In gravida interdum magna, eget molestie nulla suscipit sed.\
       Etiam maximus odio et metus scelerisque porta. Vestibulum ornare ante mauris, et maximus tortor placerat sed. Curabitur\
       consequat dictum ligula eu iaculis.",
-      "image1":"",
+      "image1":"roux_institute.jpg",
       "location":[{
         locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
         placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
         }]
 }})=>{
+    const dispatch = useDispatch();
+    async function getTestImage() {
+        let testImage = await dispatch(getImageThunk(article.image1));
+        const url = testImage.payload
+        //console.log(url)
+        const img = document.getElementById('myimg');
+        img.setAttribute('src', url);
+        
+    }
     function isEmpty(obj) {
         //helper function to check if article is empty
         return Object.keys(obj).length === 0;
@@ -61,11 +72,11 @@ const ArticleSection = ({article={
         } )
         //Store images in Flickr
         const ImageItem = (image) =>{return(
-            <img key={image} src={`public/images/${image}`} alt={`${image} placeholder`}></img>
+            <img id='myimg' key={image} src={'temp'} alt={`${image} placeholder`}></img>
             )}
             
             renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
-            
+            getTestImage()
         }
         //console.log(renderArray)
         return renderArray;
