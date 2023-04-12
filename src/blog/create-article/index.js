@@ -43,11 +43,15 @@ const CreateArticleComponent = ()=>{
                 <div className="col-4 float-right">
                 <Link to="/profile">
                 <button className="rounded-pill border-1 bg-black border-white text-white"
-              form="article_form" onClick={(e) => {createArticle({
+              form="article_form" onClick={(e) => {let array = [];
+                var inp = document.getElementById('image_upload');
+                for (var i = 0; i < inp.files.length; ++i) {
+                var name = inp.files.item(i).name;
+                array.push(name)} console.log(array);createArticle({
                   _posterid : "312",
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
-                  image1: "",
+                  images: array,
                   location: results.map(justSaveNeededStuff)});
                   //console.log(document.getElementById("image_upload").files);
                   postAllImages(document.getElementById("image_upload").files)}}>Save</button>

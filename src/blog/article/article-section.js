@@ -36,7 +36,7 @@ const ArticleSection = ({article={
       vulputate ipsum. Integer suscipit ac eros consequat elementum. In gravida interdum magna, eget molestie nulla suscipit sed.\
       Etiam maximus odio et metus scelerisque porta. Vestibulum ornare ante mauris, et maximus tortor placerat sed. Curabitur\
       consequat dictum ligula eu iaculis.",
-      "image1":"roux_institute.jpg",
+      "images":["roux_institute.jpg"],
       "location":[{
         locationName: "The Roux Institute at Northeastern University, Fore Street, Portland, ME, USA",
         placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
@@ -44,7 +44,7 @@ const ArticleSection = ({article={
 }})=>{
     const dispatch = useDispatch();
     async function getTestImage() {
-        let testImage = await dispatch(getImageThunk(article.image1));
+        let testImage = await dispatch(getImageThunk(article.images[0]));
         const url = testImage.payload
         //console.log(url)
         const img = document.getElementById('myimg');
@@ -75,7 +75,7 @@ const ArticleSection = ({article={
             <img id='myimg' key={image} src={'temp'} alt={`${image} placeholder`}></img>
             )}
             
-            renderArray.splice(2,0, ImageItem(article.image1)) //Randomly drop images between paragraphs?
+            renderArray.splice(2,0, ImageItem(article.images[0])) //Randomly drop images between paragraphs?
             getTestImage()
         }
         //console.log(renderArray)
