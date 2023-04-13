@@ -21,10 +21,16 @@ function LocationComponent(){
     const [articles, setArticles] = useState([])
     const dispatch = useDispatch();
     const getDetails = async () => {
-        await dispatch(getPlaceDetailsThunk(searchID)).then(result => {console.log(result.payload.result); setResults(result.payload.result);
-                        makeMap(<MapContainer location={{locationName:result.payload.result.name, lat:result.payload.result.geometry.location.lat,
-                            lng: result.payload.result.geometry.location.lng}}/>)});
-        await dispatch(findArticlebyLocationThunk(searchID)).then(result => {console.log(result.payload); setArticles(result.payload)});
+        await dispatch(getPlaceDetailsThunk(searchID)).then(result => {
+            setResults(result.payload.result);
+            //console.log(result.payload.result); 
+            let location = {locationName:result.payload.result.name,
+                lat:result.payload.result.geometry.location.lat,
+                lng: result.payload.result.geometry.location.lng}
+            //console.log(location);
+            makeMap(<MapContainer location={location}/>)});
+        await dispatch(findArticlebyLocationThunk(searchID)).then(result => {setArticles(result.payload); //console.log(result.payload);
+     });
     }
     useEffect(() => {
         getDetails();

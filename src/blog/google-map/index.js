@@ -1,80 +1,71 @@
-import React from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-
+import React from 'react'
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
-    position: 'relative',  
-    width: '30vw',
-    height: '30vw'
-}
-
-const mapStyles = {
-  width: '100%',
-  height: '100%'
+  width: '35vw',
+  height: '35vw'
 };
 
-export class MapContainer extends React.Component{
-  constructor (props) {
-    super(props)
-    this.location = props.location
-    this.state = {
-      showingInfoWindow: false,  // Hides or shows the InfoWindow
-      activeMarker: {},          // Shows the active marker upon click
-      selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
-    };
-  }
-  componentDidMount(){
-    this.onMarkerClick = this.onMarkerClick.bind(this)
-    this.onClose = this.onClose.bind(this);
-  }
-    
-    onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
+
+function MapContainer(location = {
+  locationName:"Roux Institute",
+  lat: 43.6615206,
+  lng: -70.2466249
+}) {
+  let currentLocation = location.location;
+  //console.log(currentLocation)
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBq6A5uqteMK_iK8T-d8YlMFmCw3CyQCWA"
+  })
+
+  const center = {
+    lat: currentLocation.lat,
+    lng: currentLocation.lng
+  };
+
+  const [map, setMap] = React.useState(null)
+  const [showingWindow, updateWindow] = React.useState({}) 
+
+  const onMarkerClick = (props) => {
+    updateWindow({
       showingInfoWindow: true
     });
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
   };
-  render() {
-    return (
-      <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={
-          {
-            lat: this.location.lat,
-            lng: this.location.lng
-          }
-        }
-        containerStyle={containerStyle}
+
+  const onInfoWindowClose = () =>
+    updateWindow({
+      showingInfoWindow: false
+    });
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+  return isLoaded ? (
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={15}
+        onUnmount={onUnmount}
       >
         <Marker
-          onClick={this.onMarkerClick}
-          name={this.location.locationName}
+        position={center}
+        onClick={onMarkerClick}
         />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
-      </Map>
-    );
-  }
+        {showingWindow.showingInfoWindow === true && (
+          <InfoWindow
+            position={center}
+            onCloseClick={onInfoWindowClose}
+          >
+        <div>
+        <h4>{currentLocation.locationName}</h4>
+      </div>
+    </InfoWindow>
+      )}
+        <></>
+      </GoogleMap>
+  ) : <></>
 }
 
-export default GoogleApiWrapper((props) => ({
-    apiKey: "AIzaSyBq6A5uqteMK_iK8T-d8YlMFmCw3CyQCWA"
-  }))(MapContainer);
+export default React.memo(MapContainer)
