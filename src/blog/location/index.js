@@ -62,8 +62,8 @@ function LocationComponent(){
                         Articles connected to this location:
                     </h4>
                     <ul>
-                        {articles.map(article => <li key={article._postid} className="list-group-item">
-                            <Link to={`/article/${article._postid}`}>{article.title}</Link></li>)}
+                        {articles.map(article => <li key={article._id} className="list-group-item">
+                            <Link to={`/article/${article._id}`}>{article.title}</Link></li>)}
                     </ul>
                 </div>
             :
