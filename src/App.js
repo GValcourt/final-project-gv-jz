@@ -6,14 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <BrowserRouter>
-      <div className="container">
+      {/*<div className="container-fluid">*/}
         <Routes>
           <Route path="/*"
                  element={<Blog/>}/>
           <Route index
                  element={<Blog/>}/>
         </Routes>
-      </div>
+      {/*</div>*/}
     </BrowserRouter>
   );
 }

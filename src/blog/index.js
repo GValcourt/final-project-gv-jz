@@ -21,25 +21,27 @@ function Blog() {
   return (
       <Provider store={store}>
           <NavigationBar/>
-      <div className="row mt-2">
-        <div className="col-10 col-md-10 col-lg-7 col-xl-6"
-             style={{"position": "relative"}}>
-          <Routes>
-            <Route path=""    element={<HomeComponent/>}/>
-            <Route path="home"    element={<HomeComponent/>}/>
-            <Route path="article/:id"    element={<ArticleComponent/>}/>
-            <Route path="profile" element={<ProfileComponent/>}/>
-            <Route path="edit-profile" element={<EditProfileComponent/>}/>
-            <Route path="create-article" element={<CreateArticleComponent/>}/>
-            <Route path="search" element={<SearchComponent/>}/>
-            <Route path="search/:params" element={<SearchComponent/>}/>
-            <Route path="location/:params" element={<LocationComponent/>}/>
-          </Routes>
+        <div className="container">
+          <div className="row mt-2">
+            <div className="col-10 col-md-10 col-lg-7 col-xl-6"
+                 style={{"position": "relative"}}>
+              <Routes>
+                <Route path="" element={<HomeComponent/>}/>
+                <Route path="home" element={<HomeComponent/>}/>
+                <Route path="article/:id" element={<ArticleComponent/>}/>
+                <Route path="profile" element={<ProfileComponent/>}/>
+                <Route path="edit-profile" element={<EditProfileComponent/>}/>
+                <Route path="create-article" element={<CreateArticleComponent/>}/>
+                <Route path="search" element={<SearchComponent/>}/>
+                <Route path="search/:params" element={<SearchComponent/>}/>
+                <Route path="location/:params" element={<LocationComponent/>}/>
+              </Routes>
+            </div>
+            <div className="d-none d-lg-block col-lg-4 col-xl-4">
+              <SuggestedContentComponent/>
+            </div>
+          </div>
         </div>
-        <div className="d-none d-lg-block col-lg-4 col-xl-4">
-          <SuggestedContentComponent/>
-        </div>
-    </div>
     </Provider>
     );
    }
