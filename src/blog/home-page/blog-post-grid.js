@@ -10,7 +10,7 @@ function PostGrid() {
                         <div className="card-body">
                             <h5 className="card-title">Blog Post 1</h5>
                             <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <a href="#" className="btn btn-primary">Read More</a>
+                            <a href="#" className="btn palette-bg-primary">Read More</a>
                         </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@ function PostGrid() {
                             <h5 className="card-title">Blog Post 2</h5>
                             <p className="card-text">Sed do eiusmod tempor incididunt ut labore et dolore magna
                                 aliqua.</p>
-                            <a href="#" className="btn btn-primary">Read More</a>
+                            <a href="#" className="btn palette-bg-primary">Read More</a>
                         </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@ function PostGrid() {
                             <h5 className="card-title">Blog Post 3</h5>
                             <p className="card-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                                 nisi ut aliquip ex ea commodo consequat.</p>
-                            <a href="#" className="btn btn-primary">Read More</a>
+                            <a href="#" className="btn palette-bg-primary">Read More</a>
                         </div>
                 </div>
             </div>

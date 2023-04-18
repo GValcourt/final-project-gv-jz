@@ -1,0 +1,16 @@
+.palette-bg-primary {
+    background-color: #e0e2db !important;
+    outline-color: #e0e2db !important;
+    box-shadow: #7f9183 !important;
+}
+
+.palette-bg-secondary {
+    color: white !important;
+    background-color: #7f9183 !important;
+    outline-color: #7f9183 !important;
+    box-shadow: #7f9183 !important;
+}
+
+.palette-text-green {
+    color: #586f6b !important;
+}
