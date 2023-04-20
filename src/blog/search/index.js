@@ -88,7 +88,9 @@ const SearchComponent = ()=>{
                 <button className="rounded-pill border-1 bg-black border-white text-white" type='button'
                     onClick={(e) => {getUsers()}}>Get Users</button><br></br>
                 <ul>
-                    {userResults.map(user => <li key={user._id}>{user.username}</li>)}
+                    {userResults.map(user => <li key={user._id}>
+                        <Link to={`/profile/${user._id}`}>{user.username}</Link>
+                    </li>)}
                 </ul>
             </div>
       </div>

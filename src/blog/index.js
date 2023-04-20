@@ -29,6 +29,7 @@ function Blog() {
                 <Route path="home" element={<HomeComponent/>}/>
                 <Route path="article/:id" element={<ArticleComponent/>}/>
                 <Route path="profile" element={<ProfileComponent/>}/>
+                <Route path="profile/:uid" element={<ProfileComponent/>}/>
                 <Route path="edit-profile" element={<EditProfileComponent/>}/>
                 <Route path="create-article" element={<CreateArticleComponent/>}/>
                 <Route path="search" element={<SearchComponent/>}/>
