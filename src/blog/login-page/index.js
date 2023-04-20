@@ -1,12 +1,14 @@
-
-//page to facilitate login/registration
+import React from "react";
+import {useSelector} from "react-redux";
+import Login from "./login";
 
 function LogInComponent(){
-    return (
-        <div>
-            LogInComponent
-      </div>
-      );
+    const token = useSelector(state => state.token);
+    if(!token){
+        return (
+            <Login/>
+        );
+    }
 }
 
-export default LogInComponent
+export default LogInComponent;

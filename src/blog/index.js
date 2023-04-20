@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router";
-import NavigationSidebar from "./navigation-pane"
 import NavigationBar from "./navigation-bar";
 import HomeComponent from "./home-page"
 import ArticleComponent from "./article"
@@ -9,7 +8,7 @@ import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
 import SearchComponent from "./search/index.js";
 import articleReducer from "./reducers/article-reducer.js"
-import profileReducer from "./reducers/profileReducer"
+import profileReducer from "./reducers/profile-reducer"
 import LocationComponent from "./location";
 import {Provider} from "react-redux";
 import { configureStore }
