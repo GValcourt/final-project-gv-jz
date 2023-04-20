@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router";
-import NavigationSidebar from "./navigation-pane"
 import NavigationBar from "./navigation-bar";
 import HomeComponent from "./home-page"
 import ArticleComponent from "./article"
@@ -33,7 +32,8 @@ function Blog() {
                 <Route path="edit-profile" element={<EditProfileComponent/>}/>
                 <Route path="create-article" element={<CreateArticleComponent/>}/>
                 <Route path="search" element={<SearchComponent/>}/>
-                <Route path="search/:params" element={<SearchComponent/>}/>
+                <Route path="search/locations/:params" element={<SearchComponent/>}/>
+                <Route path="search/users/:params" element={<SearchComponent/>}/>
                 <Route path="location/:params" element={<LocationComponent/>}/>
               </Routes>
             </div>
