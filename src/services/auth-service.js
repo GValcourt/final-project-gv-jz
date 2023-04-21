@@ -14,3 +14,34 @@ export const login = async ({ username, password }) => {
     const user = response.data;
     return user;
 };
+
+export const logout = async () => {
+    const response = await api.post(`${USERS_URL}/logout`);
+    return response.data;
+};
+
+
+export const profile = async () => {
+    const response = await api.post(`${USERS_URL}/profile`);
+    return response.data;
+};
+
+
+export const updateUser = async (user) => {
+    const response = await api.put(`${USERS_URL}/${user._id}`, user);
+    return response.data;
+};
+
+
+export const register = async ({ first, last, email, type, username, password }) => {
+    const newUser = {
+        'firstName': first,
+        'lastName': last,
+        'user_type': type,
+        'username': username,
+        'password': password,
+        'email': email
+    };
+    const response = await api.post(`${USERS_URL}`, newUser);
+    return response.data;
+}
