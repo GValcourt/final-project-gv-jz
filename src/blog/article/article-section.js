@@ -70,7 +70,7 @@ const ArticleSection = ({article={
                 </p>
             )
         } )
-        //Store images in Flickr
+        //Store images in Firebase
         const ImageItem = (image) =>{return(
             <img id='myimg' key={image} src={'temp'} alt={`${image} placeholder`}></img>
             )}
