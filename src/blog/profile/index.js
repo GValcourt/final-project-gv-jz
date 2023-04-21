@@ -1,48 +1,113 @@
-import React from "react";
-import {useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 
-function ProfileComponent(){
-    const userProfile =
-        // useSelector(state => state.profile.currentUser);
-        {
-            firstName: 'Jose',
-            lastName: 'Annunziato',
-            username: '@jannunzi',
-            avatar: './images/gorges-grant-hotel.jpeg',
-            bannerPicture: 'polyglot.png',
-            bio: 'Faculty, Software Engineer, AI, Space, and renewable enthusiast.',
-            website: 'youtube.com/webdevtv',
-            location: 'Boston, MA',
-            dateJoined: '4/2009',
-            reviewNum: '54'
-        };
-
+function ProfileComponent() {
+    const { currentUser } = useSelector((state) => state.user);
+    const [profile, setProfile] = useState(currentUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const save = () => { dispatch(updateUserThunk(profile)); };
+    useEffect(async () => {
+        const { payload } = await dispatch(profileThunk());
+        setProfile(payload);
+    }, []);
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-3">
-                    <img src={userProfile.avatar} className="img-thumbnail" alt="Profile Picture" />
-                </div>
-                <div className="col-md-9">
-                    <h1>{userProfile.firstName} {userProfile.lastName}</h1>
-                    <p className='palette-text-green'><strong>{userProfile.username}</strong></p>
-                    <p><strong>About: </strong>{userProfile.bio}</p>
-                    <hr />
-                    <div className="row">
-                        <div className="col-sm-6">
-                            <p><strong>Location:</strong> {userProfile.location}</p>
-                            <p><strong>Website:</strong> {userProfile.website}</p>
-                        </div>
-                        <div className="col-sm-6">
-                            <p><strong>Joined:</strong> {userProfile.dateJoined}</p>
-                            <p><strong>Reviews:</strong> {userProfile.reviewNum}</p>
-                        </div>
+        <div>
+            <h1>Profile</h1>
+            {profile && (
+                <div>
+                    <div>
+                        <label>First Name</label>
+                        <input type="text"
+                               value={profile.firstName}
+                               onChange={(event) => {
+                                   const newProfile = {
+                                       ...profile,
+                                       firstName: event.target.value,
+                                   };
+                                   setProfile(newProfile);
+                               }}
+                        />
+                    </div>
+                    <div>
+                        <label>Last Name</label>
+                        <input type="text"
+                               value={profile.lastName}
+                               onChange={(event) => {
+                                   const newProfile = {
+                                       ...profile,
+                                       lastName: event.target.value,
+                                   };
+                                   setProfile(newProfile);
+                               }}
+                        />
+                    </div>
+                    <div>
+                        <label>Username</label>
+                        <input type="text"
+                               value={profile.username}
+                               onChange={(event) => {
+                                   const newProfile = {
+                                       ...profile,
+                                       username: event.target.value,
+                                   };
+                                   setProfile(newProfile);
+                               }}
+                        />
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="text"
+                               value={profile.email}
+                               onChange={(event) => {
+                                   const newProfile = {
+                                       ...profile,
+                                       email: event.target.value,
+                                   };
+                                   setProfile(newProfile);
+                               }}
+                        />
                     </div>
                 </div>
-            </div>
+            )}
+            <button
+                onClick={() => {
+                    dispatch(logoutThunk());
+                    navigate("/login");
+                }}>
+                Logout</button>
+            <button onClick={save}>Save</button>
         </div>
     );
 }
+
+
+
+
+
+//         return (
+//         <div className="container">
+//             <div className="row">
+//                 <div className="col-md-3">
+//                     <img src={userProfile.avatar} className="img-thumbnail" alt="Profile Picture" />
+//                 </div>
+//                 <div className="col-md-9">
+//                     <h1>{userProfile.firstName} {userProfile.lastName}</h1>
+//                     <p className='palette-text-green'><strong>{userProfile.username}</strong></p>
+//                     <p><strong>About: </strong>{userProfile.bio}</p>
+//                     <hr />
+//                     <div className="row">
+//                         <div className="col-sm-6">
+//                             <p><strong>Reviews:</strong> {userProfile.reviewNum}</p>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
 
 export default ProfileComponent
 
