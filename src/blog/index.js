@@ -8,13 +8,15 @@ import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
 import SearchComponent from "./search/index.js";
 import articleReducer from "./reducers/article-reducer.js"
-import profileReducer from "./reducers/profile-reducer"
+// import profileReducer from "./reducers/profile-reducer"
+import authReducer from "./reducers/auth-reducer.js"
 import LocationComponent from "./location";
 import {Provider} from "react-redux";
 import { configureStore }
   from '@reduxjs/toolkit';
+import LoginComponent from "./login-page";
 const store = configureStore(
-  {reducer: {articles: articleReducer, profile: profileReducer}});
+  {reducer: {articles: articleReducer, auth: authReducer}});
 
 function Blog() {
   return (
@@ -36,6 +38,7 @@ function Blog() {
                 <Route path="search/locations/:params" element={<SearchComponent/>}/>
                 <Route path="search/users/:params" element={<SearchComponent/>}/>
                 <Route path="location/:params" element={<LocationComponent/>}/>
+                <Route path="login" element={<LoginComponent/>} />
               </Routes>
             </div>
             <div className="d-none d-lg-block col-lg-4 col-xl-4">

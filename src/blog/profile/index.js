@@ -5,6 +5,7 @@ import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-
 
 function ProfileComponent() {
     const { currentUser } = useSelector((state) => state.user);
+    console.log(currentUser);
     const [profile, setProfile] = useState(currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();

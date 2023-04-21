@@ -11,14 +11,14 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/*"
-                 element={<Blog/>}/>
+        <Route path="/*"
+             element={<Blog/>}/>
         <Route index
              element={<Blog/>}/>
-        <Route path="/login"
-               element={<LoginComponent/>} />
-        <Route path="/profile"
-               element={<ProfileComponent/>} />
+        {/*<Route path="/login"*/}
+        {/*     element={<LoginComponent/>} />*/}
+        {/*<Route path="/profile"*/}
+        {/*     element={<ProfileComponent/>} />*/}
         </Routes>
     </BrowserRouter>
   );
