@@ -71,12 +71,14 @@ const ArticleSection = ({article={
             )
         } )
         //Store images in Firebase
-        const ImageItem = (image) =>{return(
-            <img id='myimg' key={image} src={'temp'} alt={`${image} placeholder`}></img>
-            )}
-            
-            renderArray.splice(2,0, ImageItem(article.images[0])) //Randomly drop images between paragraphs?
-            getTestImage()
+        if (article.images.length > 0){
+            const ImageItem = (image) =>{return(
+                <img id='myimg' key={image} src={'temp'} alt={`${image} placeholder`}></img>
+                )}
+                
+                renderArray.splice(2,0, ImageItem(article.images[0])) //Randomly drop images between paragraphs?
+                getTestImage()
+            }
         }
         //console.log(renderArray)
         return renderArray;

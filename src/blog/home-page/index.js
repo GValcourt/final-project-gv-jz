@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect} from "react";
+import {useDispatch, useSelector}
+  from "react-redux";
 // import {Routes, Route} from "react-router";
 // import { configureStore } from '@reduxjs/toolkit';
 // import {Provider} from "react-redux";
 import PostGrid from "./blog-post-grid";
+import {findArticlesThunk} from "../../services/article-thunks.js";
 
 
 //renders pretty stuff
 
 function HomeComponent(){
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(findArticlesThunk())
+    },[dispatch]);
+    let articles = useSelector(state => state.articles);
+    //console.log(articles)
+    let loading = useSelector(state => state.loading);
     return (
         // <Provider store={store}>
             <div>
@@ -24,7 +34,7 @@ function HomeComponent(){
                 </div>
                 <div className="container">
                     <div className="row">
-                        <PostGrid/>
+                        {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                     </div>
                     <div className="row">
                         <div className="col-sm-4">
