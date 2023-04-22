@@ -12,6 +12,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
+            alert("Dispatched");
             navigate("/profile");
         } catch (e) {
             alert(e);
@@ -36,7 +37,7 @@ const Login = () => {
                     />
                 </label>
                 <div>
-                    <button onClick={handleLogin}>Submit</button>
+                    <button type="button" onClick={handleLogin}>Submit</button>
                 </div>
             </form>
         </div>

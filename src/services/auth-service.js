@@ -12,6 +12,7 @@ export const login = async ({ username, password }) => {
         password,
     });
     const user = response.data;
+    console.log("Auth service login:", user);
     return user;
 };
 
