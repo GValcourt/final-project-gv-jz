@@ -15,37 +15,40 @@ import {Provider} from "react-redux";
 import { configureStore }
   from '@reduxjs/toolkit';
 import LoginComponent from "./login-page";
+import CurrentUserContext from "./current-user-context";
 const store = configureStore(
   {reducer: {articles: articleReducer, auth: authReducer}});
 
 function Blog() {
   return (
       <Provider store={store}>
+        <CurrentUserContext>
           <NavigationBar/>
-        <div className="container">
-          <div className="row mt-2">
-            <div className="col-10 col-md-10 col-lg-7 col-xl-6"
-                 style={{"position": "relative"}}>
-              <Routes>
-                <Route path="" element={<HomeComponent/>}/>
-                <Route path="home" element={<HomeComponent/>}/>
-                <Route path="article/:id" element={<ArticleComponent/>}/>
-                <Route path="profile" element={<ProfileComponent/>}/>
-                <Route path="profile/:uid" element={<ProfileComponent/>}/>
-                <Route path="edit-profile" element={<EditProfileComponent/>}/>
-                <Route path="create-article" element={<CreateArticleComponent/>}/>
-                <Route path="search" element={<SearchComponent/>}/>
-                <Route path="search/locations/:params" element={<SearchComponent/>}/>
-                <Route path="search/users/:params" element={<SearchComponent/>}/>
-                <Route path="location/:params" element={<LocationComponent/>}/>
-                <Route path="login" element={<LoginComponent/>} />
-              </Routes>
-            </div>
-            <div className="d-none d-lg-block col-lg-4 col-xl-4">
-              <SuggestedContentComponent/>
+          <div className="container">
+            <div className="row mt-2">
+              <div className="col-10 col-md-10 col-lg-7 col-xl-6"
+                   style={{"position": "relative"}}>
+                <Routes>
+                  <Route path="" element={<HomeComponent/>}/>
+                  <Route path="home" element={<HomeComponent/>}/>
+                  <Route path="article/:id" element={<ArticleComponent/>}/>
+                  <Route path="profile" element={<ProfileComponent/>}/>
+                  <Route path="profile/:uid" element={<ProfileComponent/>}/>
+                  <Route path="edit-profile" element={<EditProfileComponent/>}/>
+                  <Route path="create-article" element={<CreateArticleComponent/>}/>
+                  <Route path="search" element={<SearchComponent/>}/>
+                  <Route path="search/locations/:params" element={<SearchComponent/>}/>
+                  <Route path="search/users/:params" element={<SearchComponent/>}/>
+                  <Route path="location/:params" element={<LocationComponent/>}/>
+                  <Route path="login" element={<LoginComponent/>}/>
+                </Routes>
+              </div>
+              <div className="d-none d-lg-block col-lg-4 col-xl-4">
+                <SuggestedContentComponent/>
+              </div>
             </div>
           </div>
-        </div>
+        </CurrentUserContext>
     </Provider>
     );
    }
