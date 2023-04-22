@@ -23,6 +23,7 @@ export const logout = async () => {
 
 
 export const profile = async () => {
+    console.log("Auth-service profile running");
     const response = await api.post(`${USERS_URL}/profile`);
     return response.data;
 };

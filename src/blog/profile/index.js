@@ -4,16 +4,18 @@ import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 
 function ProfileComponent() {
-    const { currentUser } = useSelector((state) => state.user);
-    console.log(currentUser);
+    const { currentUser } = useSelector((state) => state.auth);
     const [profile, setProfile] = useState(currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const save = () => { dispatch(updateUserThunk(profile)); };
-    useEffect(async () => {
-        const { payload } = await dispatch(profileThunk());
-        setProfile(payload);
-    }, []);
+    useEffect( () => {
+        async function fetchData() {
+            const { payload } = await dispatch(profileThunk());
+            setProfile(payload)}
+            fetchData();
+        }, []);
+    console.log(profile.first_name);
     return (
         <div>
             <h1>Profile</h1>
@@ -22,11 +24,11 @@ function ProfileComponent() {
                     <div>
                         <label>First Name</label>
                         <input type="text"
-                               value={profile.firstName}
+                               value={profile.first_name}
                                onChange={(event) => {
                                    const newProfile = {
                                        ...profile,
-                                       firstName: event.target.value,
+                                       first_name: event.target.value,
                                    };
                                    setProfile(newProfile);
                                }}
@@ -35,11 +37,11 @@ function ProfileComponent() {
                     <div>
                         <label>Last Name</label>
                         <input type="text"
-                               value={profile.lastName}
+                               value={profile.last_name}
                                onChange={(event) => {
                                    const newProfile = {
                                        ...profile,
-                                       lastName: event.target.value,
+                                       last_name: event.target.value,
                                    };
                                    setProfile(newProfile);
                                }}
@@ -58,19 +60,19 @@ function ProfileComponent() {
                                }}
                         />
                     </div>
-                    <div>
-                        <label>Email</label>
-                        <input type="text"
-                               value={profile.email}
-                               onChange={(event) => {
-                                   const newProfile = {
-                                       ...profile,
-                                       email: event.target.value,
-                                   };
-                                   setProfile(newProfile);
-                               }}
-                        />
-                    </div>
+                    {/*<div>*/}
+                    {/*    <label>Email</label>*/}
+                    {/*    <input type="text"*/}
+                    {/*           value={profile.email}*/}
+                    {/*           onChange={(event) => {*/}
+                    {/*               const newProfile = {*/}
+                    {/*                   ...profile,*/}
+                    {/*                   email: event.target.value,*/}
+                    {/*               };*/}
+                    {/*               setProfile(newProfile);*/}
+                    {/*           }}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
                 </div>
             )}
             <button
