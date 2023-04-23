@@ -1,8 +1,9 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import { createArticleThunk} from "../../services/article-thunks";
 import { checkLocationThunk } from "../../services/search-thunk";
 import { postImageThunk } from "../../services/image-thunk";
+import { profileThunk } from "../../services/auth-thunks";
 import {useDispatch, useSelector}
   from "react-redux";
 
@@ -17,7 +18,7 @@ const CreateArticleComponent = ()=>{
         dispatch(createArticleThunk(newArticle))}
     const checkLocation = async () => {
         //console.log(search);
-        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates]); console.log(result)
+        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates]);
         });
     }
     function removeResultfromState(place_id){
@@ -32,10 +33,12 @@ const CreateArticleComponent = ()=>{
             dispatch(postImageThunk(files[item]))
         }
     }
-
+    useEffect(() => {
+        dispatch(profileThunk())
+    },[])
     return (
         <div className="container">
-            {currentUser === null? <>
+            {currentUser !== null || currentUser !== undefined ? <>
             <div className="row" style={{width:'100%'}}>
 
                 <div className="col float-left">
@@ -53,6 +56,7 @@ const CreateArticleComponent = ()=>{
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
                   images: array,
+                  private: document.getElementById("article_visability").checked,
                   location: results.map(justSaveNeededStuff)});
                   //console.log(document.getElementById("image_upload").files);
                   postAllImages(document.getElementById("image_upload").files)}}>Save</button>
@@ -74,6 +78,10 @@ const CreateArticleComponent = ()=>{
                     <textarea id="article_text" cols="50" rows="50"
                         defaultValue={'Text of the article'}/></li>
                 <li className="list-group-item">
+                    <label htmlFor="article_visability">Private Article (private requires login to view)</label>
+                    <br></br>
+                    <input type="checkbox" id="article_visability" /></li>
+                <li className="list-group-item">
                     <label htmlFor="image_upload">Article Image</label>
                     <br></br>
                     <input id="image_upload" type="file" multiple={true}/></li>
@@ -90,13 +98,13 @@ const CreateArticleComponent = ()=>{
                             <p>{location.formatted_address}</p>
                             <button onClick={(e)=>{removeResultfromState(location.place_id)}}>
                                 Delete</button></li>)}
-                        {/*console.log(results)*/}
                     </ul>
                 </li>
             </form>
             </>: <><h1>
                 Create Article
             </h1>
+            {console.log(currentUser)}
             <p>
                 Please log in to create an article!</p>
                 <Link to="/login"><button className="rounded-pill border-1 bg-black border-white text-white">Go to Login!</button></Link></>}

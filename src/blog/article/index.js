@@ -1,14 +1,13 @@
 //takes in an article and renders it with a map
 import { useParams } from "react-router"
-import {useDispatch } from "react-redux"
+import {useDispatch, useSelector } from "react-redux"
 import {findArticleByAidThunk } from "../../services/article-thunks"
 import { useEffect, useState } from "react"
 import ArticleSection from "./article-section"
 
-//TODO: add a comments footer that requires logged in state
 
 const ArticleComponent = ()=>{
-
+    const currentUser = useSelector(state => state.auth);
     const aid = useParams().id
     const dispatch = useDispatch();
     const [article, setArticle] = useState({})
@@ -22,7 +21,15 @@ const ArticleComponent = ()=>{
 
     return (
         <div className="container">
-            <ArticleSection article={article}/>
+            {
+                article.private === true && (currentUser === undefined || currentUser === null)?
+                <div>
+                    <h1>{article.title}</h1>
+                    <h2> You must be logged in to view this article</h2>
+                </div>
+                :
+                <ArticleSection article={article}/>
+            }
 
       </div>
       );

@@ -2,12 +2,14 @@
 import { Link } from "react-router-dom"
 import {useDispatch } from "react-redux"
 import { getImageThunk } from "../../services/image-thunk";
+import { getUsersByPredThunk } from "../../services/user-thunks";
+import { useEffect, useState } from 'react';
 
 
 //TODO: add a comments footer that requires logged in state
 
 const ArticleSection = ({article={
-    "_posterid": "12345",
+    "_posterID": "12345",
       "_postid": "12345",
       "title": "My Galvant Around New York",
       "text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porta urna sed ante molestie elementum id a mauris.\
@@ -42,7 +44,17 @@ const ArticleSection = ({article={
         placeID: "ChIJcUVoBcmdskwRwMf9m2cqlmo" 
         }]
 }})=>{
+    const [author, setAuthor] = useState({});
     const dispatch = useDispatch();
+    async function getData () {
+        if ((article._posterID !== "12345" && article._posterID !== undefined) && (isEmpty(author))){
+            await dispatch(getUsersByPredThunk(['_id', article._posterID])).then(result => {setAuthor(result.payload[0])});
+        }
+    };
+    useEffect(()=>{
+        getData();
+    })
+
     async function getTestImage() {
         let testImage = await dispatch(getImageThunk(article.images[0]));
         const url = testImage.payload
@@ -91,7 +103,8 @@ const ArticleSection = ({article={
                     {article.title}
                 </h1>
                 <h2>
-                    By {article._posterid} (will figure out how to replace with name later)
+                    By {<Link to={`/profile/${author._id}`}>{author.first_name + " " +author.last_name}</Link>} 
+                    {author.user_type === "business"? <h6>Corporate Partner</h6>: ""}
                 </h2>
                 <h4>
                     Posted: {article.date}
