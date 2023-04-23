@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
+import { getUsersByPred } from "../../services/user-service";
 
 function ProfileComponent() {
-    const { currentUser } = useSelector((state) => state.auth);
-    const [profile, setProfile] = useState(currentUser);
+    let params = useParams().uid
+    console.log(params);
+    const [profile, setProfile] = useState({});
+    async function fetchData() {
+        if (params === undefined) {
+            const { payload } = await dispatch(profileThunk());
+            console.log(payload);
+            setProfile(payload)
+        }
+        else{
+            const { payload } = await dispatch(getUsersByPred({_id:`${params}`}));
+            console.log(payload);
+            setProfile(payload)
+        }
+    }
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const save = () => { dispatch(updateUserThunk(profile)); };
     useEffect( () => {
-        async function fetchData() {
-            const { payload } = await dispatch(profileThunk());
-            setProfile(payload)}
             fetchData();
         }, []);
     console.log(profile.first_name);
@@ -112,7 +123,4 @@ function ProfileComponent() {
 //     );
 // }
 
-export default ProfileComponent
-
-
-
+export default ProfileComponent;
