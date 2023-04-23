@@ -14,7 +14,9 @@ const RegisterComponent = () => {
     const dispatch = useDispatch();
     const handleRegister = async () => {
         try {
-            await dispatch(registerThunk({ username, password }));
+            await dispatch(registerThunk({first: document.getElementById('firstNameInput').value,
+            last: document.getElementById('lastNameInput').value, lastName, email, type: document.getElementById("typeSelect").value,
+            username, password}));
             navigate("/profile");
         } catch (e) {
             alert(e);
@@ -40,7 +42,8 @@ const RegisterComponent = () => {
                                 <div className="mw-2">
                                     <input className="form-control"
                                            type="text" id="firstNameInput" value={firstName}
-                                           onChange={(event) => setFirstName(event.target.value)}
+                                           onChange={(event) => {
+                                            setFirstName(event.target.value);}}
                                     />
                                 </div>
                         </div>
