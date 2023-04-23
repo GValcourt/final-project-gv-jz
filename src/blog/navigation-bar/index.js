@@ -6,7 +6,7 @@ function NavigationBar() {
     // const { currentUser } = useSelector((state) => state.user);
     // if(!currentUser){
         return(
-            <nav className="navbar navbar-expand-md palette-nav">
+            <Navbar collapseOnSelect expand="lg" className='palette-nav'>
                 <div className="container-fluid">
                     <Navbar.Brand className="palette-brand" href="#home">Book It</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -19,7 +19,7 @@ function NavigationBar() {
                         </Nav>
                     </Navbar.Collapse>
                 </div>
-            </nav>
+            </Navbar>
         )
     // }
     // else {
