@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 import { getUsersByPredThunk } from "../../services/user-thunks";
-import { ErrorBoundary } from "react-error-boundary";
 
 function ProfileComponent() {
     let params = useParams().uid
@@ -27,7 +26,6 @@ function ProfileComponent() {
     }, []);
     console.log(profile.first_name);
     return (
-        <ErrorBoundary fallback={<div>Something went wrong</div>}> {/*** This does not work ***/}
             <div className="row">
                 <div className="col-1">
                     <img src={profile.avatar}/>
@@ -123,7 +121,6 @@ function ProfileComponent() {
                     )}
                 </div>
             </div>
-        </ErrorBoundary>
     );
 }
 
