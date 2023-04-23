@@ -12,7 +12,7 @@ function NavigationBar() {
         return(
             <Navbar collapseOnSelect expand="sm" className="palette-nav">
                 <div className="container-fluid">
-                    <a className="navbar-brand palette-brand" href="#">Book It</a>
+                    <a className="navbar-brand palette-brand" href="/">Book It</a>
                     <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
                     <Navbar.Collapse id="navbarSupportedContent">
                         <Nav>
