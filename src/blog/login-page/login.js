@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState} from "react"
+import {Link} from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../../services/auth-thunks.js";
@@ -10,9 +11,13 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogin = async () => {
+        if ((username === undefined || username === "" ) && ( password === undefined || password === "")) {
+            alert("Please fill in all fields");
+            return;
+        }
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            navigate("/home");
         } catch (e) {
             alert(e);
         }
@@ -36,10 +41,10 @@ const Login = () => {
                     />
                 </label>
                 <div>
-                    <button type="button" onClick={handleLogin}>Submit</button>
+                    <button className="btn btn-primary" type="button" onClick={handleLogin}>Submit</button>
                 </div>
                 <div>
-                    <button type="button" onClick={navigate("/register")}>Register</button>
+                    <Link className="btn btn-primary" to={"/register"}>Register</Link>
                 </div>
             </form>
         </div>
