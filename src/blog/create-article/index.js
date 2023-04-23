@@ -3,13 +3,13 @@ import {Link} from "react-router-dom";
 import { createArticleThunk} from "../../services/article-thunks";
 import { checkLocationThunk } from "../../services/search-thunk";
 import { postImageThunk } from "../../services/image-thunk";
-import {useDispatch}
+import {useDispatch, useSelector}
   from "react-redux";
 
-  //TODO: require being logged in so that poster id can be saved
-  //TODO: allow multiple images to be saved
+  //TODO: allow multiple images to be saved; might not support that in the long run
 
 const CreateArticleComponent = ()=>{
+    const currentUser = useSelector(state => state.auth);
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
     const dispatch = useDispatch();
@@ -35,6 +35,7 @@ const CreateArticleComponent = ()=>{
 
     return (
         <div className="container">
+            {currentUser === null? <>
             <div className="row" style={{width:'100%'}}>
 
                 <div className="col float-left">
@@ -48,7 +49,7 @@ const CreateArticleComponent = ()=>{
                 for (var i = 0; i < inp.files.length; ++i) {
                 var name = inp.files.item(i).name;
                 array.push(name)} console.log(array);createArticle({
-                  _posterid : "312",
+                  _posterid : currentUser._id,
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
                   images: array,
@@ -93,6 +94,12 @@ const CreateArticleComponent = ()=>{
                     </ul>
                 </li>
             </form>
+            </>: <><h1>
+                Create Article
+            </h1>
+            <p>
+                Please log in to create an article!</p>
+                <Link to="/login"><button className="rounded-pill border-1 bg-black border-white text-white">Go to Login!</button></Link></>}
       </div>
       );
 }
