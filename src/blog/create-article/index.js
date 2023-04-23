@@ -38,9 +38,8 @@ const CreateArticleComponent = ()=>{
     },[])
     return (
         <div className="container">
-            {currentUser !== null || currentUser !== undefined ? <>
+            {currentUser.currentUser !== null && currentUser.currentUser !== undefined ? <>
             <div className="row" style={{width:'100%'}}>
-
                 <div className="col float-left">
                 <Link to="/profile"><button className="border-0 bg-white" type="reset" form="article_form">X</button></Link>
                 </div>
