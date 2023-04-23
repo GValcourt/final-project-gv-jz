@@ -1,6 +1,8 @@
-import React from 'react';
-import { Navbar, Nav} from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import { Navbar, Nav, Container} from 'react-bootstrap';
 import { useSelector } from "react-redux";
+import { Collapse } from 'react-bootstrap'
+
 
 function NavigationBar() {
     const { currentUser } = useSelector((state) => state.auth);
@@ -8,16 +10,16 @@ function NavigationBar() {
     if(!currentUser){
         console.log("No current user (navbar)");
         return(
-            <Navbar collapseOnSelect expand="lg" className='palette-nav'>
+            <Navbar collapseOnSelect expand="sm" className="palette-nav">
                 <div className="container-fluid">
-                    <Navbar.Brand className="palette-brand" href="#home">Book It</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="navbar-nav">
-                            <Nav.Link href="/home">Home</Nav.Link>
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/search">Search</Nav.Link>
-                            <Nav.Link href="/create-article">Create Article</Nav.Link>
+                    <a className="navbar-brand palette-brand" href="#">Book It</a>
+                    <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
+                    <Navbar.Collapse id="navbarSupportedContent">
+                        <Nav>
+                                <Nav.Link href="/home">Home</Nav.Link>
+                                <Nav.Link href="/login">Login</Nav.Link>
+                                <Nav.Link href="/search">Search</Nav.Link>
+                                <Nav.Link href="/create-article">Create Article</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </div>
@@ -25,15 +27,15 @@ function NavigationBar() {
         )
     }
     else {
-        if(currentUser.type == 'sysadmin'){
+        if(currentUser.user_type === 'sysadmin'){
             console.log("Recognized admin");
             return(
-                <nav className="navbar navbar-expand-md palette-nav">
+                <Navbar collapseOnSelect expand="sm" className="palette-nav">
                     <div className="container-fluid">
-                        <Navbar.Brand className="palette-brand" href="#home">Book It</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="navbar-nav">
+                        <a className="navbar-brand palette-brand" href="#">Book It</a>
+                        <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
+                        <Navbar.Collapse id="navbarSupportedContent">
+                            <Nav>
                                 <Nav.Link href="/home">Home</Nav.Link>
                                 <Nav.Link href="/profile">Profile</Nav.Link>
                                 <Nav.Link href="/search">Search</Nav.Link>
@@ -42,27 +44,24 @@ function NavigationBar() {
                             </Nav>
                         </Navbar.Collapse>
                     </div>
-                </nav>
+                </Navbar>
             )
         }
-        // const profile_id = String(currentUser.username)
-        // const profile_url = "/profile/" + profile_id;
-        // console.log("Profile url: ", profile_url)
         return (
-            <nav className="navbar navbar-expand-md palette-nav">
+            <Navbar collapseOnSelect expand="sm" className="palette-nav">
                 <div className="container-fluid">
-                    <Navbar.Brand className="palette-brand" href="#home">Book It</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="navbar-nav">
+                    <a className="navbar-brand palette-brand" href="#">Book It</a>
+                    <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
+                    <Navbar.Collapse id="navbarSupportedContent">
+                        <Nav>
                             <Nav.Link href="/home">Home</Nav.Link>
-                            <Nav.Link href="/profile" state={{user: currentUser }}>Profile</Nav.Link>
+                            <Nav.Link href="/profile">Profile</Nav.Link>
                             <Nav.Link href="/search">Search</Nav.Link>
                             <Nav.Link href="/create-article">Create Article</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </div>
-            </nav>
+            </Navbar>
         );
     }
 }
