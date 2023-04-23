@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './vendors/bootswatch/bootstrap.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
