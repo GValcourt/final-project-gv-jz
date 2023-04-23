@@ -16,6 +16,7 @@ import { configureStore }
   from '@reduxjs/toolkit';
 import LoginComponent from "./login-page";
 import CurrentUserContext from "./current-user-context";
+import RegisterComponent from "./register";
 const store = configureStore(
   {reducer: {articles: articleReducer, auth: authReducer}});
 
@@ -43,6 +44,7 @@ function Blog() {
                   <Route path="search/users/:params" element={<SearchComponent/>}/>
                   <Route path="location/:params" element={<LocationComponent/>}/>
                   <Route path="login" element={<LoginComponent/>}/>
+                  <Route path="register" element={<RegisterComponent/>}/>
                 </Routes>
               </div>
               {/*<div className="col-1"/>*/}

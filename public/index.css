@@ -51,3 +51,9 @@
 .align-text-center {
     text-align: center;
 }
+
+.hr-style {
+    background-color: #d23f2d;
+    border-color: #d23f2d;
+    height: 2px;
+}
