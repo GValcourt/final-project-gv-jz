@@ -6,7 +6,7 @@ function PostGrid( articles ) {
     //console.log(articles.articles.articles)
     const dispatch = useDispatch()
     const [images, setImage] = useState(['../../images/gorges-grant-hotel.jpeg', '../../images/gorges-grant-hotel.jpeg', '../../images/gorges-grant-hotel.jpeg'])
-    let firstArticles = articles.articles.articles.slice(0,3)
+    let firstArticles = articles.articles.articles.slice(-4,-1)
     useEffect(() => {
         for (let i = 0; i < firstArticles.length; i++) {
             if(firstArticles[i].images[0] !== undefined && firstArticles[i].images[0] !== null
