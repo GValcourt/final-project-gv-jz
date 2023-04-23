@@ -14,9 +14,17 @@ const RegisterComponent = () => {
     const dispatch = useDispatch();
     const handleRegister = async () => {
         try {
-            await dispatch(registerThunk({first: document.getElementById('firstNameInput').value,
-            last: document.getElementById('lastNameInput').value, lastName, email, type: document.getElementById("typeSelect").value,
-            username, password}));
+            await dispatch(registerThunk(
+                {
+                    first: document.getElementById('firstNameInput').value,
+                    last: document.getElementById('lastNameInput').value,
+                    // lastName,
+                    email,
+                    type: document.getElementById("typeSelect").value,
+                    username,
+                    password
+                }
+            ));
             navigate("/profile");
         } catch (e) {
             alert(e);

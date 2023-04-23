@@ -1,8 +1,9 @@
 import React, { useState} from "react"
 import {Link} from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginThunk } from "../../services/auth-thunks.js";
+import {Link} from "react-router-dom";
 
 
 const Login = () => {
@@ -24,29 +25,41 @@ const Login = () => {
     };
 
     return(
-        <div className="d-flex align-items-center">
-            <form>
-                <label>
-                    <p>Username</p>
-                    <input className="form-control"
-                           type="text" value={username}
-                           onChange={(event) => setUsername(event.target.value)}
-                    />
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input className="form-control"
-                           type="password" value={password}
-                           onChange={(event) => setPassword(event.target.value)}
-                    />
-                </label>
-                <div>
-                    <button className="btn btn-primary" type="button" onClick={handleLogin}>Submit</button>
+        <div className="row">
+            <div className="col-1"/>
+            <div className="col-8">
+                <div className="row">
+                    <div className="d-flex mt-5">
+                        <h4>
+                            Please login
+                        </h4>
+                    </div>
+                    <div>
+                        <hr className="hr-style"/>
+                    </div>
                 </div>
-                <div>
-                    <Link className="btn btn-primary" to={"/register"}>Register</Link>
+                <div className="d-flex align-items-center">
+                    <form>
+                        <label htmlFor="usernameInput" className="form-label mt-2">Username</label>
+                        <input className="form-control"
+                               type="text" id="usernameInput" value={username}
+                               onChange={(event) => setUsername(event.target.value)}
+                        />
+                        <label htmlFor="passwordInput" className="form-label mt-2">Password</label>
+                        <input className="form-control"
+                               type="password" id="passwordInput" value={password}
+                               onChange={(event) => setPassword(event.target.value)}
+                        />
+                        <div className="mt-4 d-flex">
+
+                            <button type="button" className="btn palette-bg-primary" onClick={handleLogin}>Submit</button>
+
+                            <Link className="btn" to="/register">Register</Link>
+
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
