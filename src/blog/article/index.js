@@ -18,11 +18,13 @@ const ArticleComponent = ()=>{
     useEffect(() => {
         getData();
         }, []);
+        {console.log(currentUser)}
+                    {console.log("private? ",article.private)}
 
     return (
         <div className="container">
             {
-                article.private === true && (currentUser === undefined || currentUser === null)?
+                article.private === true && (currentUser.currentUser === undefined || currentUser.currentUser === null)?
                 <div>
                     <h1>{article.title}</h1>
                     <h2> You must be logged in to view this article</h2>
