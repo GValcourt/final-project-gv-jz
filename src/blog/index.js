@@ -24,12 +24,14 @@ function Blog() {
       <Provider store={store}>
         <CurrentUserContext>
           <NavigationBar/>
-          <div className="container">
+          <div className="d-flex">
             <div className="row mt-2">
-              <div className="col-10 col-md-10 col-lg-7 col-xl-6"
+              <div className="col-9"
                    style={{"position": "relative"}}>
+              {/*<div className="col-10 col-md-10 col-lg-10 col-xl-6"*/}
+              {/*     style={{"position": "relative"}}>*/}
                 <Routes>
-                  <Route path="" element={<HomeComponent/>}/>
+                  <Route path="/*" element={<HomeComponent/>}/>
                   <Route path="home" element={<HomeComponent/>}/>
                   <Route path="article/:id" element={<ArticleComponent/>}/>
                   <Route path="profile" element={<ProfileComponent/>}/>
@@ -43,7 +45,8 @@ function Blog() {
                   <Route path="login" element={<LoginComponent/>}/>
                 </Routes>
               </div>
-              <div className="d-none d-lg-block col-lg-4 col-xl-4">
+              {/*<div className="col-1"/>*/}
+              <div className="col-3">
                 <SuggestedContentComponent/>
               </div>
             </div>

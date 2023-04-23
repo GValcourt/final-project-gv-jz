@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 import { getUsersByPred } from "../../services/user-service";
@@ -24,8 +24,8 @@ function ProfileComponent() {
     const navigate = useNavigate();
     const save = () => { dispatch(updateUserThunk(profile)); };
     useEffect( () => {
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
     console.log(profile.first_name);
     return (
         <div>
@@ -96,31 +96,5 @@ function ProfileComponent() {
         </div>
     );
 }
-
-
-
-
-
-//         return (
-//         <div className="container">
-//             <div className="row">
-//                 <div className="col-md-3">
-//                     <img src={userProfile.avatar} className="img-thumbnail" alt="Profile Picture" />
-//                 </div>
-//                 <div className="col-md-9">
-//                     <h1>{userProfile.firstName} {userProfile.lastName}</h1>
-//                     <p className='palette-text-green'><strong>{userProfile.username}</strong></p>
-//                     <p><strong>About: </strong>{userProfile.bio}</p>
-//                     <hr />
-//                     <div className="row">
-//                         <div className="col-sm-6">
-//                             <p><strong>Reviews:</strong> {userProfile.reviewNum}</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
 
 export default ProfileComponent;

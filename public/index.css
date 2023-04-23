@@ -11,6 +11,10 @@
     box-shadow: #6E8250 !important;
 }
 
+.palette-bg-col {
+    background-color: #e0e2db !important;
+}
+
 .palette-text-green {
     color: #586f6b !important;
 }
@@ -22,4 +26,20 @@
 
 .palette-brand {
     color: #D15342 !important;
+}
+
+.font-16 {
+    font-size: 16px !important;
+}
+
+.font-24 {
+    font-size: 32px !important;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.align-text-center {
+    text-align: center;
 }

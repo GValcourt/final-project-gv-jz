@@ -7,9 +7,6 @@ import {useDispatch, useSelector}
 import PostGrid from "./blog-post-grid";
 import {findArticlesThunk} from "../../services/article-thunks.js";
 
-
-//renders pretty stuff
-
 function HomeComponent(){
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -19,17 +16,13 @@ function HomeComponent(){
     //console.log(articles)
     let loading = useSelector(state => state.loading);
     return (
-        // <Provider store={store}>
-            <div>
-                <div className="row">
-                    {/* Nav and search bar */}
-                </div>
-                <div className="jumbotron">
+            <div className="container">
+                <div className="jumbotron w-100">
                     <h1 className="display-4">Book It</h1>
                     <p className="lead">Hotel reviews for the modern nomad.</p>
                     <hr className="my-4"/>
                         <p className="lead">
-                            <a className="btn palette-bg-secondary btn-lg" href="#" role="button">Read more</a>
+                            <a className="btn palette-bg-secondary btn-lg" href="/create-article" role="button">Create Article</a>
                         </p>
                 </div>
                 <div className="container">
@@ -45,19 +38,10 @@ function HomeComponent(){
                                 <li className="list-group-item"><a href="#">The Portland Regency</a></li>
                             </ul>
                         </div>
-                        <div className="col-sm-4">
-                            <h3>Follow Me</h3>
-                            <ul className="list-group">
-                                <li className="list-group-item"><a href="#">Facebook</a></li>
-                                <li className="list-group-item"><a href="#">Twitter</a></li>
-                                <li className="list-group-item"><a href="#">Instagram</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
             </div>
-        // </Provider>
       );
 }
 
