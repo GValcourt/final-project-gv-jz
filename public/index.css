@@ -28,6 +28,14 @@
     color: #D15342 !important;
 }
 
+.palette-btn-bg {
+    background-color: #d23f2d !important;
+}
+
+.palette-btn-blue {
+    background-color: #9FD3EF !important;
+}
+
 .font-16 {
     font-size: 16px !important;
 }

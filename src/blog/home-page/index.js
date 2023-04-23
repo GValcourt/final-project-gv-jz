@@ -29,7 +29,7 @@ function HomeComponent(){
                     <div className="row">
                         {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                     </div>
-                    <div className="row">
+                    <div className="row mt-3">
                         <div className="col-sm-4">
                             <h3>Top Rated Hotels</h3>
                             <ul className="list-group">

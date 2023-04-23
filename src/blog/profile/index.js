@@ -26,71 +26,100 @@ function ProfileComponent() {
     }, []);
     console.log(profile.first_name);
     return (
-        <div>
-            <h1>Profile</h1>
-            {profile && (
-                <div>
-                    <div>
-                        <label>First Name</label>
-                        <input type="text"
-                               value={profile.first_name}
-                               onChange={(event) => {
-                                   const newProfile = {
-                                       ...profile,
-                                       first_name: event.target.value,
-                                   };
-                                   setProfile(newProfile);
-                               }}
-                        />
+        <div className="row">
+            <div className="col-1">
+                <img src={profile.avatar}/>
+            </div>
+            <div className="col m-3 mw-5">
+                <h1 className="display-4">Profile</h1>
+                {profile && (
+                    <div className="row">
+                        <div className="col-4">
+                            <div>
+                                <label className="col-form-label pe-2">First Name</label>
+                                <input type="text"
+                                       value={profile.first_name}
+                                       className="form-control"
+                                       onChange={(event) => {
+                                           const newProfile = {
+                                               ...profile,
+                                               first_name: event.target.value,
+                                           };
+                                           setProfile(newProfile);
+                                       }}
+                                />
+                            </div>
+                            <div>
+                                <label className="col-form-label pe-2">Last Name</label>
+                                <input type="text"
+                                       value={profile.last_name}
+                                       className="form-control"
+                                       onChange={(event) => {
+                                           const newProfile = {
+                                               ...profile,
+                                               last_name: event.target.value,
+                                           };
+                                           setProfile(newProfile);
+                                       }}
+                                />
+                            </div>
+                            <div>
+                                <label className="col-form-label pe-2">Username</label>
+                                <input type="text"
+                                       value={profile.username}
+                                       className="form-control"
+                                       onChange={(event) => {
+                                           const newProfile = {
+                                               ...profile,
+                                               username: event.target.value,
+                                           };
+                                           setProfile(newProfile);
+                                       }}
+                                />
+                            </div>
+                            <div>
+                                <label className="col-form-label pe-2">Location</label>
+                                <input type="text"
+                                       value={profile.location}
+                                       className="form-control"
+                                       onChange={(event) => {
+                                           const newProfile = {
+                                               ...profile,
+                                               location: event.target.value,
+                                           };
+                                           setProfile(newProfile);
+                                       }}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="bio" className="form-label mt-2">Bio</label>
+                                <textarea className="form-control" id="bio" rows="3" value={profile.bio}
+                                          onChange={(event) => {
+                                              const newProfile = {
+                                                  ...profile,
+                                                  bio: event.target.value,
+                                              };
+                                              setProfile(newProfile);
+                                          }}/>
+                            </div>
+                            <div className="row mt-3">
+                                <div className="col-2 me-2">
+                                    <button className="btn palette-btn-blue" onClick={save}>Save</button>
+                                </div>
+                                <div className="col-2">
+                                    <button className="btn palette-btn-bg text-white"
+                                            onClick={() => {
+                                                dispatch(logoutThunk());
+                                                navigate("/login");
+                                            }}>
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label>Last Name</label>
-                        <input type="text"
-                               value={profile.last_name}
-                               onChange={(event) => {
-                                   const newProfile = {
-                                       ...profile,
-                                       last_name: event.target.value,
-                                   };
-                                   setProfile(newProfile);
-                               }}
-                        />
-                    </div>
-                    <div>
-                        <label>Username</label>
-                        <input type="text"
-                               value={profile.username}
-                               onChange={(event) => {
-                                   const newProfile = {
-                                       ...profile,
-                                       username: event.target.value,
-                                   };
-                                   setProfile(newProfile);
-                               }}
-                        />
-                    </div>
-                    {/*<div>*/}
-                    {/*    <label>Email</label>*/}
-                    {/*    <input type="text"*/}
-                    {/*           value={profile.email}*/}
-                    {/*           onChange={(event) => {*/}
-                    {/*               const newProfile = {*/}
-                    {/*                   ...profile,*/}
-                    {/*                   email: event.target.value,*/}
-                    {/*               };*/}
-                    {/*               setProfile(newProfile);*/}
-                    {/*           }}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                </div>
-            )}
-            <button
-                onClick={() => {
-                    dispatch(logoutThunk());
-                    navigate("/login");
-                }}>
-                Logout</button>
-            <button onClick={save}>Save</button>
+                )}
+            </div>
         </div>
     );
 }
