@@ -33,9 +33,9 @@ function HomeComponent(){
                         <div className="col-sm-4">
                             <h3>Top Rated Hotels</h3>
                             <ul className="list-group">
-                                <li className="list-group-item"><a href="#">Camden Inn</a></li>
-                                <li className="list-group-item"><a href="#">The Federal</a></li>
-                                <li className="list-group-item"><a href="#">The Portland Regency</a></li>
+                                <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>
+                                <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>
+                                <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>
                             </ul>
                         </div>
                     </div>
