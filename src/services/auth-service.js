@@ -25,6 +25,9 @@ export const logout = async () => {
 export const profile = async () => {
     console.log("Auth-service profile running");
     const response = await api.post(`${USERS_URL}/profile`);
+    if(response.status == 404){
+        console.log("Error 404 recognised");
+        return response.status}
     return response.data;
 };
 
@@ -46,5 +49,10 @@ export const register = async ({ first, last, email, type, username, password })
     };
     console.log(newUser)
     const response = await api.post(`${USERS_URL}/register`, newUser);
+    return response.data;
+}
+
+export const checkUsername = async (username) => {
+    const response = await api.post(`${USERS_URL}/find`, username);
     return response.data;
 }

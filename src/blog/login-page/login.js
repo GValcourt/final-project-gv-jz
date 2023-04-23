@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { loginThunk } from "../../services/auth-thunks.js";
-import {Link} from "react-router-dom";
 
 
 const Login = () => {
@@ -50,12 +49,14 @@ const Login = () => {
                                type="password" id="passwordInput" value={password}
                                onChange={(event) => setPassword(event.target.value)}
                         />
-                        <div className="mt-4 d-flex">
-
-                            <button type="button" className="btn palette-bg-primary" onClick={handleLogin}>Submit</button>
-
-                            <Link className="btn" to="/register">Register</Link>
-
+                        <div className="mt-4 row">
+                            <div className="col">
+                                <button type="button" className="btn palette-bg-primary" onClick={handleLogin}>Submit
+                                </button>
+                            </div>
+                            <div className="col">
+                                <Link className="btn btn-outline-info" to="/register">Register</Link>
+                            </div>
                         </div>
                     </form>
                 </div>
