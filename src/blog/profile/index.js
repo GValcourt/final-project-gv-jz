@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
-import { getUsersByPred } from "../../services/user-service";
+import { getUsersByPredThunk } from "../../services/user-thunks";
 
 function ProfileComponent() {
     let params = useParams().uid
-    console.log(params);
+    //console.log(params);
     const [profile, setProfile] = useState({});
     async function fetchData() {
         if (params === undefined) {
@@ -15,9 +15,7 @@ function ProfileComponent() {
             setProfile(payload)
         }
         else{
-            const { payload } = await dispatch(getUsersByPred({_id:`${params}`}));
-            console.log(payload);
-            setProfile(payload)
+            await dispatch(getUsersByPredThunk(['_id', params])).then(result => {console.log(result); setProfile(result.payload[0])});
         }
     }
     const dispatch = useDispatch();
