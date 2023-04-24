@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
+import * as followsService from "../../services/follows-service";
 import { getUsersByPredThunk } from "../../services/user-thunks";
 import YourArticles from "../home-page/your-articles";
 import YourLikes from "./your-likes";
@@ -10,16 +11,38 @@ import YourFollows from "./your-follows";
 function ProfileComponent() {
     let params = useParams().uid
     const currentUser = useSelector(state => state.auth.currentUser);
-    console.log("current user: ", currentUser);
+    //console.log("current user: ", currentUser);
     const [profile, setProfile] = useState({});
+    const [follows, setFollows] = useState([]);
+    const [loading,setLoading] = useState(true);
+    //console.log(profile)
+    const followUser = async () => {
+        console.log("followUser")
+        await followsService.userFollowsUser(currentUser._id, profile._id);
+        setLoading(true)
+      };
+    const unfollowUser = async () => {
+        console.log("unfollowUser")
+        await followsService.userUnfollowsUser(currentUser._id, profile._id);
+        setLoading(true)
+      };
     async function fetchData() {
+        if (currentUser !== null){
+            let tempArray = await followsService.findFollowsByFollowerId(currentUser._id)
+            setFollows(tempArray)
+            setLoading(false)
+
+            //console.log(tempArray)
+        }
         if (params === undefined) {
             const { payload } = await dispatch(profileThunk());
-            console.log(payload);
+            //console.log(payload);
             setProfile(payload);
+            setLoading(false)
         }
         else{
-            await dispatch(getUsersByPredThunk(['_id', params])).then(result => {console.log(result); setProfile(result.payload[0])});
+            await dispatch(getUsersByPredThunk(['_id', params])).then(result => {setProfile(result.payload[0])});
+            setLoading(false)
         }
     }
     const dispatch = useDispatch();
@@ -27,8 +50,8 @@ function ProfileComponent() {
     const save = () => { dispatch(updateUserThunk(profile)); };
     useEffect( () => {
         fetchData();
-    }, []);
-    console.log(profile.first_name);
+    }, [loading]);
+    //console.log(profile.first_name);
     return (
             <div className="row">
                 <div className="col m-3 mw-5">
@@ -108,7 +131,7 @@ function ProfileComponent() {
                                                       setProfile(newProfile);
                                                   }}/>
                                     </div>
-                                    { (currentUser !== undefined && currentUser !== null) &&
+                                    { ((currentUser !== undefined && currentUser !== null) && currentUser._id === profile._id )&&
                                     <div className="d-flex mt-3">
                                         {console.log("currentUser: ", currentUser)}
                                         <div className="d-flex me-2">
@@ -124,6 +147,30 @@ function ProfileComponent() {
                                             </button>
                                         </div>
                                     </div>
+                                    }
+                                    {console.log("loading value:", loading)}
+                                    { ((currentUser !== undefined && currentUser !== null) &&
+                                     currentUser._id !== profile._id && !loading )&&
+                                    <div className="d-flex mt-3">
+                                        {follows.some(follow=>follow.follower === currentUser._id)?
+                                                <div className="col-2">
+                                                    {console.log("following: ", follows)}
+                                                    <button className="btn palette-btn-bg text-white" onClick={unfollowUser}>
+                                                        Unfollow {profile.username}
+                                                    </button>
+                                                </div>
+                                                :
+                                                <div className="col-2">
+                                                    {console.log("not following: ", follows)}
+                                                    <button className="btn palette-btn-bg text-white" onClick={followUser}>
+                                                        Follow {profile.username}
+                                                    </button>
+                                                </div>
+
+                                        }
+                                        
+                                    
+                                </div>
                                     }
                                     
                                 </div>
