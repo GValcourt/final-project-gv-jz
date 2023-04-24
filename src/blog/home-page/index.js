@@ -93,9 +93,9 @@ function HomeComponent(){
                         <div className="row">
                             {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                         </div>
-                        <div className="col-3 d-none d-md-block">
-                            <SuggestedContentComponent/>
-                        </div>
+                        {/*<div className="col d-none d-md-block">*/}
+                        {/*    <SuggestedContentComponent/>*/}
+                        {/*</div>*/}
                     </div>
 
                 </div>

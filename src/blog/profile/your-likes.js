@@ -27,17 +27,16 @@ function YourLikes() {
                     <h6 className="text-muted">You haven't liked any locations yet.</h6>
                 ) : (
                     <div>
-                        {/*{locations.map(location => (*/}
-                        {/*    <Card key={location.placeID} className="mb-3">*/}
-                        {/*        <Card.Body>*/}
-                        {/*            <Card.Title>{location.locationName}</Card.Title>*/}
-                        {/*            <Link to={`/articles/${location.id}`}>*/}
-                        {/*                <Button variant="primary">Read More</Button>*/}
-                        {/*            </Link>*/}
-                        {/*        </Card.Body>*/}
-                        {/*    </Card>*/}
-                        {/*))}*/}
-                        <h1>There are locations</h1>
+                        {locations.map(location => (
+                            <Card key={location.placeID} className="mb-3">
+                                <Card.Body>
+                                    <Card.Title>{location.locationName}</Card.Title>
+                                    <Link to={`/articles/${location.id}`}>
+                                        <Button variant="primary">Read More</Button>
+                                    </Link>
+                                </Card.Body>
+                            </Card>
+                        ))}
                     </div>
                 )}
             </div>
