@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import {findArticlebyLocationThunk} from '../../services/location-thunk.js'
 
 function YourLikes(profile) {
-    const currentUser = useSelector(state => state.auth);
     const [locations, setLocations] = useState([])
     let dispatch = useDispatch();
     //console.log(profile.profile)
@@ -51,7 +50,7 @@ function YourLikes(profile) {
                             <Card key={location._id} className="mb-3">
                                 <Card.Body>
                                     <Card.Title>{location.locationName}</Card.Title>
-                                    <Link to={`/articles/${location.placeID}`}>
+                                    <Link to={`/location/${location.placeID}`}>
                                         <Button variant="primary">Read More</Button>
                                     </Link>
                                 </Card.Body>

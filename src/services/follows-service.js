@@ -18,7 +18,7 @@ export const userUnfollowsUser = async (followerId, followedId) => {
 
 export const findFollowsByFollowedId = async (followed) => {
   const response = await axios.get(`${USERS_API}/${followed}/follows`);
-  console.log(response.data)
+  //console.log(response.data)
   return response.data;
 };
 

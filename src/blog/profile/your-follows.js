@@ -45,17 +45,6 @@ function YourFollows(profile) {
         getData();
     },[profile])
     
-    if( follows.length === 0){
-        console.log("No followers");
-        return(
-            <div className="mt-4">
-                <h4 className="display-5 font-24">Your Follows</h4>
-                    <h6 className="text-muted">You don't follow anyone yet.</h6>
-            </div>
-
-        )
-    }
-    else {
         //console.log(locations);
         return (
             <>
@@ -99,7 +88,6 @@ function YourFollows(profile) {
         </div>
         </>
         )
-    }
 }
 
 export default YourFollows;

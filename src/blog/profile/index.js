@@ -17,18 +17,16 @@ function ProfileComponent() {
     const [loading,setLoading] = useState(true);
     //console.log(profile)
     const followUser = async () => {
-        console.log("followUser")
         await followsService.userFollowsUser(currentUser._id, profile._id);
         setLoading(true)
       };
     const unfollowUser = async () => {
-        console.log("unfollowUser")
         await followsService.userUnfollowsUser(currentUser._id, profile._id);
         setLoading(true)
       };
     async function fetchData() {
         if (currentUser !== null){
-            let tempArray = await followsService.findFollowsByFollowerId(currentUser._id)
+            let tempArray = await followsService.findFollowsByFollowerId(profile._id)
             setFollows(tempArray)
             setLoading(false)
 
@@ -50,7 +48,7 @@ function ProfileComponent() {
     const save = () => { dispatch(updateUserThunk(profile)); };
     useEffect( () => {
         fetchData();
-    }, [loading]);
+    }, [params, loading]);
     //console.log(profile.first_name);
     return (
             <div className="row">
@@ -133,7 +131,6 @@ function ProfileComponent() {
                                     </div>
                                     { ((currentUser !== undefined && currentUser !== null) && currentUser._id === profile._id )&&
                                     <div className="d-flex mt-3">
-                                        {console.log("currentUser: ", currentUser)}
                                         <div className="d-flex me-2">
                                             <button className="btn palette-btn-blue" onClick={save}>Save</button>
                                         </div>
@@ -148,20 +145,17 @@ function ProfileComponent() {
                                         </div>
                                     </div>
                                     }
-                                    {console.log("loading value:", loading)}
                                     { ((currentUser !== undefined && currentUser !== null) &&
                                      currentUser._id !== profile._id && !loading )&&
                                     <div className="d-flex mt-3">
                                         {follows.some(follow=>follow.follower === currentUser._id)?
                                                 <div className="col-2">
-                                                    {console.log("following: ", follows)}
                                                     <button className="btn palette-btn-bg text-white" onClick={unfollowUser}>
                                                         Unfollow {profile.username}
                                                     </button>
                                                 </div>
                                                 :
                                                 <div className="col-2">
-                                                    {console.log("not following: ", follows)}
                                                     <button className="btn palette-btn-bg text-white" onClick={followUser}>
                                                         Follow {profile.username}
                                                     </button>
