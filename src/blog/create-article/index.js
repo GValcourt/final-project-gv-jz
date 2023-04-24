@@ -50,8 +50,8 @@ const CreateArticleComponent = ()=>{
                 var inp = document.getElementById('image_upload');
                 for (var i = 0; i < inp.files.length; ++i) {
                 var name = inp.files.item(i).name;
-                array.push(name)} console.log(array);createArticle({
-                  _posterid : currentUser.currentUser._id,
+                array.push(name)} alert(currentUser._id);createArticle({
+                  _posterID : currentUser.currentUser._id,
                   title: document.getElementById('title').value,
                   text: document.getElementById('article_text').value,
                   images: array,
