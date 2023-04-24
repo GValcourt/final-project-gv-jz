@@ -99,16 +99,16 @@ const ArticleSection = ({article={
     return (
         <div className="container">
             {!isEmpty(article)?<div>
-                <h1>
+                <h1 className="display-5">
                     {article.title}
                 </h1>
-                <h2>
+                <h4 className="text-muted">
                     By {<Link to={`/profile/${author._id}`}>{author.first_name + " " +author.last_name}</Link>} 
                     {author.user_type === "business"? <h6>Corporate Partner</h6>: ""}
-                </h2>
-                <h4>
-                    Posted: {article.date}
                 </h4>
+                <h6 className="text-info">
+                    Posted: {article.date}
+                </h6>
                 <h6>
                     Places referenced:
                     <ul>

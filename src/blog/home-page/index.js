@@ -90,21 +90,18 @@ function HomeComponent(){
                     </div>
                     <div className="container">
                         <YourArticles/>
-                        <div className="row">
+                        <div className="mt-5">
+                            <h4 className="display-4 font-36">Latest Articles</h4>
                             {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                         </div>
                         {/*<div className="col d-none d-md-block">*/}
                         {/*    <SuggestedContentComponent/>*/}
                         {/*</div>*/}
                     </div>
-
                 </div>
             )
         }
-
     }
-
-
 }
 
 export default HomeComponent

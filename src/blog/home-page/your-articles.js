@@ -40,8 +40,8 @@ function YourArticles() {
                             <Card.Body>
                                 <Card.Title>{article.title}</Card.Title>
                                 <Card.Text>{article.summary}</Card.Text>
-                                <Link to={`/articles/${article.id}`}>
-                                    <Button variant="primary">Read More</Button>
+                                <Link to={`/article/${article._id}`}>
+                                    <Button variant="info" classname="palette-btn-bg">Read More</Button>
                                 </Link>
                             </Card.Body>
                         </Card>
