@@ -13,16 +13,17 @@ function YourArticles() {
          console.log("Error: ", someResult.error);
         }
         else{
-            setArticles([someResult])
+            console.log(someResult)
+            setArticles(someResult.payload)
         }
     }
     async function getData () {
-        await dispatch(findArticlebyPredThunk(['_id', currentUser.id])).then(
+        await dispatch(findArticlebyPredThunk(['_posterID', currentUser.currentUser._id])).then(
             result => handleArticles(result));
     }
     useEffect(()=>{
         getData();
-    })
+    },[])
     if(!articles){
         console.log("No articles");
         }
