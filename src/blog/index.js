@@ -4,12 +4,10 @@ import HomeComponent from "./home-page"
 import ArticleComponent from "./article"
 import ProfileComponent from "./profile"
 import EditProfileComponent from "./edit-profile"
-import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
 import SearchComponent from "./search/index.js";
 import AdminComponent from "./admin";
 import articleReducer from "./reducers/article-reducer.js"
-// import profileReducer from "./reducers/profile-reducer"
 import authReducer from "./reducers/auth-reducer.js"
 import LocationComponent from "./location";
 import {Provider} from "react-redux";
@@ -26,12 +24,10 @@ function Blog() {
       <Provider store={store}>
         <CurrentUserContext>
           <NavigationBar/>
-          <div className="d-flex">
-            <div className="row mt-2">
-              <div className="col-7 col-sm-8"
-                   style={{"position": "relative"}}>
-              {/*<div className="col-10 col-md-10 col-lg-10 col-xl-6"*/}
-              {/*     style={{"position": "relative"}}>*/}
+          <div className="container-fluid">
+            {/*<div className="row mt-2">*/}
+            {/*  <div className="col bg-info"*/}
+            {/*       style={{"position": "relative"}}>*/}
                 <Routes>
                   <Route path="/*" element={<HomeComponent/>}/>
                   <Route path="home" element={<HomeComponent/>}/>
@@ -48,12 +44,8 @@ function Blog() {
                   <Route path="register" element={<RegisterComponent/>}/>
                   <Route path="admin" element = {<AdminComponent/>}/>
                 </Routes>
-              </div>
-              {/*<div className="col-1"/>*/}
-              <div className="col-3 d-none d-md-block">
-                <SuggestedContentComponent/>
-              </div>
-            </div>
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         </CurrentUserContext>
     </Provider>

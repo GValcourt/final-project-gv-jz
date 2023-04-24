@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 import { getUsersByPredThunk } from "../../services/user-thunks";
 import YourArticles from "../home-page/your-articles";
+import YourLikes from "./your-likes";
 
 function ProfileComponent() {
     let params = useParams().uid
@@ -28,12 +29,11 @@ function ProfileComponent() {
     console.log(profile.first_name);
     return (
             <div className="row">
-                <div className="col-xs-12 col-lg-6 col-md-8 col-sm-10 m-3 mw-5">
-
+                <div className="col m-3 mw-5">
                     {profile && (
                         <div className="d-flex justify-content-center">
-                            <div className="col-lg-10 col-md-8 col-sm-10 col-xs-12">
-                                <h1 className="display-4">Profile</h1>
+                            <div className="col-10">
+                                <h1 className="display-4 font-36">Profile</h1>
                                 <div>
                                     <label className="col-form-label pe-2">First Name</label>
                                     <input type="text"
@@ -119,8 +119,11 @@ function ProfileComponent() {
                         </div>
                     )}
                 </div>
-                <div className="col-lg-4 col-md-4 mw-2">
+                <div className="col mw-2">
                     <YourArticles/>
+                </div>
+                <div className="col mw-2">
+                    <YourLikes/>
                 </div>
             </div>
     );

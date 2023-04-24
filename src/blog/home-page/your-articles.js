@@ -30,7 +30,7 @@ function YourArticles() {
     console.log(articles);
     return (
         <div className="mt-4">
-            <h4 className="display-5 font-24">Your Articles</h4>
+            <h4 className="display-4 font-36">Your Articles</h4>
             {articles.length === 0 ? (
                 <h6 className="text-muted">You haven't written any articles yet.</h6>
             ) : (
