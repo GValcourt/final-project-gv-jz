@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk } from "../../services/auth-thunks";
 import { getUsersByPredThunk } from "../../services/user-thunks";
 import YourArticles from "../home-page/your-articles";
 import YourLikes from "./your-likes";
+import YourFollows from "./your-follows";
 
 function ProfileComponent() {
     let params = useParams().uid
-    console.log(params);
+    const currentUser = useSelector(state => state.auth.currentUser);
+    console.log("current user: ", currentUser);
     const [profile, setProfile] = useState({});
     async function fetchData() {
         if (params === undefined) {
@@ -106,7 +108,9 @@ function ProfileComponent() {
                                                       setProfile(newProfile);
                                                   }}/>
                                     </div>
+                                    { (currentUser !== undefined && currentUser !== null) &&
                                     <div className="d-flex mt-3">
+                                        {console.log("currentUser: ", currentUser)}
                                         <div className="d-flex me-2">
                                             <button className="btn palette-btn-blue" onClick={save}>Save</button>
                                         </div>
@@ -120,6 +124,8 @@ function ProfileComponent() {
                                             </button>
                                         </div>
                                     </div>
+                                    }
+                                    
                                 </div>
                             </div>
                         </div>
@@ -132,6 +138,9 @@ function ProfileComponent() {
                     </div>
                     <div className="col mw-2">
                         <YourLikes profile={profile}/>
+                    </div>
+                    <div className="col mw-2">
+                        <YourFollows profile={profile}/>
                     </div>
                     </>
 

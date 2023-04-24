@@ -8,7 +8,7 @@ function YourLikes(profile) {
     const currentUser = useSelector(state => state.auth);
     const [locations, setLocations] = useState([])
     let dispatch = useDispatch();
-    console.log(profile.profile)
+    //console.log(profile.profile)
     //console.log(params)
     async function getData () {
         if(profile.profile.likes !== null && profile.profile.likes !== undefined){
