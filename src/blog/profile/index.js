@@ -8,7 +8,7 @@ import YourLikes from "./your-likes";
 
 function ProfileComponent() {
     let params = useParams().uid
-    //console.log(params);
+    console.log(params);
     const [profile, setProfile] = useState({});
     async function fetchData() {
         if (params === undefined) {
@@ -125,12 +125,18 @@ function ProfileComponent() {
                         </div>
                     )}
                 </div>
-                <div className="col mw-2">
-                    <YourArticles/>
-                </div>
-                <div className="col mw-2">
-                    <YourLikes/>
-                </div>
+                {
+                    Object.keys(profile).length > 0 && <>
+                    <div className="col mw-2">
+                        <YourArticles profile={profile}/>
+                    </div>
+                    <div className="col mw-2">
+                        <YourLikes profile={profile}/>
+                    </div>
+                    </>
+
+                }
+                
             </div>
     );
 }

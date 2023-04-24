@@ -89,7 +89,7 @@ function HomeComponent(){
                         </p>
                     </div>
                     <div className="container">
-                        <YourArticles/>
+                        <YourArticles profile={currentAuth.currentUser}/>
                         <div className="mt-5">
                             <h4 className="display-4 font-36">Latest Articles</h4>
                             {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}

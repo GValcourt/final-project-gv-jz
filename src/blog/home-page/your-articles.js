@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import {findArticlebyPredThunk} from "../../services/article-thunks";
 
-function YourArticles() {
+function YourArticles(profile) {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.auth);
     const [articles, setArticles] = useState([])
@@ -13,21 +13,23 @@ function YourArticles() {
          console.log("Error: ", someResult.error);
         }
         else{
-            console.log(someResult)
+            //console.log(someResult)
             setArticles(someResult.payload)
         }
     }
     async function getData () {
-        await dispatch(findArticlebyPredThunk(['_posterID', currentUser.currentUser._id])).then(
-            result => handleArticles(result));
+        if(profile !== null && profile !== undefined){
+            await dispatch(findArticlebyPredThunk(['_posterID', profile.profile._id])).then(
+                result => handleArticles(result));
+        }
     }
     useEffect(()=>{
         getData();
-    },[])
+    },[profile])
     if(!articles){
         console.log("No articles");
         }
-    console.log(articles);
+    //console.log(articles);
     return (
         <div className="mt-4">
             <h4 className="display-4 font-36">Your Articles</h4>
@@ -36,12 +38,12 @@ function YourArticles() {
             ) : (
                 <div>
                     {articles.map(article => (
-                        <Card key={article.id} className="mb-3">
+                        <Card key={article._id} className="mb-3">
                             <Card.Body>
                                 <Card.Title>{article.title}</Card.Title>
                                 <Card.Text>{article.summary}</Card.Text>
                                 <Link to={`/article/${article._id}`}>
-                                    <Button variant="info" classname="palette-btn-bg">Read More</Button>
+                                    <Button variant="info" className="palette-btn-bg">Read More</Button>
                                 </Link>
                             </Card.Body>
                         </Card>
