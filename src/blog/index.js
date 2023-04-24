@@ -7,6 +7,7 @@ import EditProfileComponent from "./edit-profile"
 import SuggestedContentComponent from "./suggested-content-pane"
 import CreateArticleComponent from "./create-article";
 import SearchComponent from "./search/index.js";
+import AdminComponent from "./admin";
 import articleReducer from "./reducers/article-reducer.js"
 // import profileReducer from "./reducers/profile-reducer"
 import authReducer from "./reducers/auth-reducer.js"
@@ -27,7 +28,7 @@ function Blog() {
           <NavigationBar/>
           <div className="d-flex">
             <div className="row mt-2">
-              <div className="col-9"
+              <div className="col-7 col-sm-8"
                    style={{"position": "relative"}}>
               {/*<div className="col-10 col-md-10 col-lg-10 col-xl-6"*/}
               {/*     style={{"position": "relative"}}>*/}
@@ -45,10 +46,11 @@ function Blog() {
                   <Route path="location/:params" element={<LocationComponent/>}/>
                   <Route path="login" element={<LoginComponent/>}/>
                   <Route path="register" element={<RegisterComponent/>}/>
+                  <Route path="admin" element = {<AdminComponent/>}/>
                 </Routes>
               </div>
               {/*<div className="col-1"/>*/}
-              <div className="col-3">
+              <div className="col-3 d-none d-md-block">
                 <SuggestedContentComponent/>
               </div>
             </div>

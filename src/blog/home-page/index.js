@@ -30,16 +30,16 @@ function HomeComponent(){
                     <div className="row">
                         {loading || articles.length === 0? "Loading...": <PostGrid articles={articles}/>}
                     </div>
-                    <div className="row mt-3">
-                        <div className="col-sm-4">
-                            <h3>Top Rated Hotels</h3>
-                            <ul className="list-group">
-                                <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>
-                                <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>
-                                <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    {/*<div className="row mt-3">*/}
+                    {/*    <div className="col-sm-4">*/}
+                    {/*        <h3>Top Rated Hotels</h3>*/}
+                    {/*        <ul className="list-group">*/}
+                    {/*            <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>*/}
+                    {/*            <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>*/}
+                    {/*            <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>*/}
+                    {/*        </ul>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
             </div>
@@ -61,16 +61,16 @@ function HomeComponent(){
                         <div className="row">
                             {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                         </div>
-                        <div className="row mt-3">
-                            <div className="col-sm-4">
-                                <h3>Top Rated Hotels</h3>
-                                <ul className="list-group">
-                                    <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>
-                                    <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>
-                                    <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        {/*<div className="row mt-3">*/}
+                        {/*    <div className="col-sm-4">*/}
+                        {/*        <h3>Top Rated Hotels</h3>*/}
+                        {/*        <ul className="list-group">*/}
+                        {/*            <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>*/}
+                        {/*            <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>*/}
+                        {/*            <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>*/}
+                        {/*        </ul>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
 
                 </div>
@@ -92,16 +92,16 @@ function HomeComponent(){
                         <div className="row">
                             {loading || articles.length === 0? "Loading...":<PostGrid articles={articles}/>}
                         </div>
-                        <div className="row mt-3">
-                            <div className="col-sm-4">
-                                <h3 className="display-5 font-24">Top Rated Hotels</h3>
-                                <ul className="list-group">
-                                    <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>
-                                    <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>
-                                    <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        {/*<div className="row mt-3">*/}
+                        {/*    <div className="col-sm-4">*/}
+                        {/*        <h3 className="display-5 font-24">Top Rated Hotels</h3>*/}
+                        {/*        <ul className="list-group">*/}
+                        {/*            <li className="list-group-item"><a href="https://camdenharbourinn.com/">Camden Inn</a></li>*/}
+                        {/*            <li className="list-group-item"><a href="https://www.thefederalmaine.com/">The Federal</a></li>*/}
+                        {/*            <li className="list-group-item"><a href="https://www.theregency.com/">The Portland Regency</a></li>*/}
+                        {/*        </ul>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
 
                 </div>
