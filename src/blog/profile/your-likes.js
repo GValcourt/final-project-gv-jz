@@ -2,22 +2,26 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
-import {findArticlebyLocationThunk} from '../../services/location-thunk.js'
+import {findLikesByUserID} from '../../services/likes-service.js';
+import {findArticlebyLocationThunk} from '../../services/location-thunk.js';
 
-function YourLikes(profile) {
+function YourLikes(profile, params = undefined) {
     const [locations, setLocations] = useState([])
     let dispatch = useDispatch();
     //console.log(profile.profile)
     //console.log(params)
     async function getData () {
-        if(profile.profile.likes !== null && profile.profile.likes !== undefined){
-            let tempArray = [];
-            for (let i =0; i<profile.profile.likes.length; i++){
-                let tempValue = await dispatch(findArticlebyLocationThunk(profile.profile.likes[i])).then(res => res.payload);
-                tempArray.push(tempValue);
+        if(profile.profile._id !== null && profile.profile._id !== undefined){
+            let tempArray = await findLikesByUserID(profile.profile._id);
+            //console.log("tempArray", tempArray)
+            let finalArray = [];
+            for (let i =0; i<tempArray.length; i++){
+                let tempValue = await dispatch(findArticlebyLocationThunk(tempArray[i].placeID)).then(res => res.payload);
+                finalArray.push(tempValue);
+                console.log("tempValue",tempValue)
             }
             //console.log("values:", tempArray);
-            setLocations(tempArray)
+            setLocations(finalArray)
         }
         else{
             setLocations([]);
@@ -25,7 +29,7 @@ function YourLikes(profile) {
     }
     useEffect(()=>{
         getData();
-    },[profile])
+    },[profile, params])
     
     if( locations.length === 0){
         console.log("No locations");

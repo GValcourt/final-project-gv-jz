@@ -25,13 +25,6 @@ function ProfileComponent() {
         setLoading(true)
       };
     async function fetchData() {
-        if (currentUser !== null){
-            let tempArray = await followsService.findFollowsByFollowerId(profile._id)
-            setFollows(tempArray)
-            setLoading(false)
-
-            //console.log(tempArray)
-        }
         if (params === undefined) {
             const { payload } = await dispatch(profileThunk());
             //console.log(payload);
@@ -40,6 +33,11 @@ function ProfileComponent() {
         }
         else{
             await dispatch(getUsersByPredThunk(['_id', params])).then(result => {setProfile(result.payload[0])});
+        }
+        if (profile._id !== undefined){
+            setLoading(true)
+            let tempArray = await followsService.findFollowsByFollowerId(profile._id)
+            setFollows(tempArray)
             setLoading(false)
         }
     }
@@ -48,7 +46,7 @@ function ProfileComponent() {
     const save = () => { dispatch(updateUserThunk(profile)); };
     useEffect( () => {
         fetchData();
-    }, [params, loading]);
+    }, [params]);
     //console.log(profile.first_name);
     return (
             <div className="row">
@@ -175,13 +173,13 @@ function ProfileComponent() {
                 {
                     Object.keys(profile).length > 0 && <>
                     <div className="col mw-2">
-                        <YourArticles profile={profile}/>
+                        <YourArticles profile={profile} params={params}/>
                     </div>
                     <div className="col mw-2">
-                        <YourLikes profile={profile}/>
+                        <YourLikes profile={profile} params={params}/>
                     </div>
                     <div className="col mw-2">
-                        <YourFollows profile={profile}/>
+                        <YourFollows profile={profile} params={params}/>
                     </div>
                     </>
 
