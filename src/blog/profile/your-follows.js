@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import { getUsersByPredThunk } from '../../services/user-thunks.js';
 import {findFollowsByFollowedId, findFollowsByFollowerId} from '../../services/follows-service.js';
 
-function YourFollows(profile) {
-    const currentUser = useSelector(state => state.auth);
+function YourFollows(profile, params) {
     const [follows, setFollows] = useState([])
     const [followers, setFollowers] = useState([])
     let dispatch = useDispatch();
@@ -14,6 +13,10 @@ function YourFollows(profile) {
     //console.log(params)
     async function getData () {
         //console.log(profile.profile._id)
+        //console.log("follows", follows)
+        //console.log("followers", followers)
+        setFollowers([])
+        setFollows([])
         if(profile.profile._id !== null && profile.profile._id !== undefined){
             //console.log(profile.profile._id)
             let followArray = await findFollowsByFollowerId(profile.profile._id)
@@ -28,13 +31,13 @@ function YourFollows(profile) {
             //console.log(follows)
             //console.log(profile.profile._id)
             let followerArray = await findFollowsByFollowedId(profile.profile._id)
-            //console.log("followArray", followArray)
+            //console.log("followerArray", followerArray)
             let temp2Array = [];
             for (let i =0; i<followerArray.length; i++){
-                let tempValue = await dispatch(getUsersByPredThunk(['_id',followArray[i].follower])).then(res => res.payload[0]);
+                let tempValue = await dispatch(getUsersByPredThunk(['_id',followerArray[i].followed])).then(res => res.payload[0]);
                 temp2Array.push(tempValue);
             }
-            //console.log("values:", tempArray);
+            //console.log("values:", temp2Array);
             setFollowers(temp2Array)
         }
         else{
@@ -43,7 +46,7 @@ function YourFollows(profile) {
     }
     useEffect(()=>{
         getData();
-    },[profile])
+    },[profile, params])
     
         //console.log(locations);
         return (

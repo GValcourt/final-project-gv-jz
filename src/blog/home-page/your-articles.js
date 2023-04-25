@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import {findArticlebyPredThunk} from "../../services/article-thunks";
 
-function YourArticles(profile) {
+function YourArticles(profile, params=undefined) {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.auth);
     const [articles, setArticles] = useState([])
@@ -24,8 +24,10 @@ function YourArticles(profile) {
         }
     }
     useEffect(()=>{
+        console.log("articles before getData():", articles)
+        setArticles([])
         getData();
-    },[profile])
+    },[profile, params])
     if(!articles){
         console.log("No articles");
         }
