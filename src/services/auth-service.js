@@ -25,7 +25,7 @@ export const logout = async () => {
 export const profile = async () => {
     console.log("Auth-service profile running");
     const response = await api.post(`${USERS_URL}/profile`);
-    if(response.status == 404){
+    if(response.status === 404){
         console.log("Error 404 recognised");
         return response.status}
     return response.data;

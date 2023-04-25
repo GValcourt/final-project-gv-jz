@@ -4,7 +4,6 @@ import {useDispatch, useSelector}
 import PostGrid from "./blog-post-grid";
 import {findArticlesThunk} from "../../services/article-thunks.js";
 import YourArticles from "./your-articles";
-import SuggestedContentComponent from "../suggested-content-pane";
 
 function HomeComponent(){
     const currentAuth = useSelector(state => state.auth);
