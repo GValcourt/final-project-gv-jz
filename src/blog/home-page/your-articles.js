@@ -24,7 +24,7 @@ function YourArticles(profile, params=undefined) {
         }
     }
     useEffect(()=>{
-        console.log("articles before getData():", articles)
+        //console.log("articles before getData():", articles)
         setArticles([])
         getData();
     },[profile, params])

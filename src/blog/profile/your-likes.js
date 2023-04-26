@@ -18,7 +18,7 @@ function YourLikes(profile, params = undefined) {
             for (let i =0; i<tempArray.length; i++){
                 let tempValue = await dispatch(findArticlebyLocationThunk(tempArray[i].placeID)).then(res => res.payload);
                 finalArray.push(tempValue);
-                console.log("tempValue",tempValue)
+                //console.log("tempValue",tempValue)
             }
             //console.log("values:", tempArray);
             setLocations(finalArray)
@@ -32,7 +32,7 @@ function YourLikes(profile, params = undefined) {
     },[profile, params])
     
     if( locations.length === 0){
-        console.log("No locations");
+        //console.log("No locations");
         return(
             <div className="mt-4">
                 <h4 className="display-5 font-24">Your Liked Places</h4>
