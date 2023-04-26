@@ -32,10 +32,11 @@ export const profile = async () => {
 };
 
 
-export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}/${user.id}`, user);
+export const updateUser = async ({uid, user}) => {
+    const response = await api.put(`${USERS_URL}/${uid}`, user);
     return response.data;
 };
+
 
 
 export const register = async ({ first, last, email, type, username, password }) => {

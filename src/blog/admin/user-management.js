@@ -56,7 +56,8 @@ const UserManagement = () => {
     };
     const handleUpdate = async (updatedUser) => {
         try {
-            await dispatch(updateUserThunk(updatedUser)); /*** I don't know why this function thinks it is expecting 0 arguments. I've tried with and without curlies. ***/
+            await dispatch(updateUserThunk({uid: updatedUser.id, user:updatedUser}));
+
         } catch (e) {
             console.log("Error ", e);
             alert(e.response.data);
@@ -71,12 +72,10 @@ const UserManagement = () => {
             // Update existing user
             const updatedUser = { firstName, lastName, email, type, username, password };
             handleUpdate(updatedUser).then(result => console.log("Updated user: ", result));
-            // TODO: Reset users array
         } else {
             // Add new user
             const newUser = { firstName, lastName, email, type, username, password };
             handleRegister(newUser).then(result => console.log(result))
-            // TODO: Reset users array
         }
         // Clear form inputs
         setId('');
@@ -90,7 +89,9 @@ const UserManagement = () => {
     const handleDelete = async () => {
 
         try{
-            await dispatch(deleteUserThunk(usernameToDelete));
+            const userToDelete = await dispatch(getUsersByPredThunk(['username', usernameToDelete]));
+            await dispatch(deleteUserThunk({user: userToDelete}));
+
         } catch (e) {
             console.log("Error ", e);
             alert(e.response.data);
@@ -119,7 +120,7 @@ const UserManagement = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <h3>Add User</h3>
+                        <h4>Add User</h4>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="form1FirstName">
                                 <Form.Label>First Name</Form.Label>
@@ -141,11 +142,19 @@ const UserManagement = () => {
                                     <option value="admin">Admin</option>
                                 </Form.Control>
                             </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                            </Form.Group>
                             <Button className="mt-2" variant="secondary" type="submit">Save</Button>
                         </Form>
                     </Col>
                     <Col>
-                        <h3>Update User</h3>
+                        <h4>Update User</h4>
                         <Form onSubmit={findUserHandler}>
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
@@ -155,7 +164,7 @@ const UserManagement = () => {
                         </Form>
                     </Col>
                     <Col>
-                        <h3>Delete User</h3>
+                        <h4>Delete User</h4>
                         <Form onSubmit={handleDelete}>
                             <Form.Group controlId="form3Username">
                                 <Form.Label>Username</Form.Label>
