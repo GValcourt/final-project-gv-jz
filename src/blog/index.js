@@ -16,6 +16,7 @@ import { configureStore }
 import LoginComponent from "./login-page";
 import CurrentUserContext from "./current-user-context";
 import RegisterComponent from "./register";
+import UserManagement from "./admin/user-management";
 const store = configureStore(
   {reducer: {articles: articleReducer, auth: authReducer}});
 
@@ -43,6 +44,7 @@ function Blog() {
                   <Route path="login" element={<LoginComponent/>}/>
                   <Route path="register" element={<RegisterComponent/>}/>
                   <Route path="admin" element = {<AdminComponent/>}/>
+                  {/*<Route path="/user-management" element={<UserManagement/>}/>*/}
                 </Routes>
             {/*  </div>*/}
             {/*</div>*/}

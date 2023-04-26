@@ -30,10 +30,14 @@
 
 .palette-btn-bg {
     background-color: #d23f2d !important;
+    border-color: #d23f2d !important;
+    outline-color: #d23f2d !important;
 }
 
 .palette-btn-blue {
     background-color: #9FD3EF !important;
+    border-color: #9FD3EF !important;
+    outline-color: #9FD3EF !important;
 }
 
 .font-16 {

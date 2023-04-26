@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Card, Button } from 'react-bootstrap';
+import UserManagement from "./user-management";
 
 const AdminComponent = () => {
     const currentUser = useSelector(state => state.auth.currentUser);
@@ -17,6 +18,10 @@ const AdminComponent = () => {
         )
      }
 
+    const goToUM = () => {
+        navigate("/admin/usermanagement");
+    }
+
     return (
         <div className="container m-3">
             <h2 className="display-4 font-24">Admin Page</h2>
@@ -24,7 +29,7 @@ const AdminComponent = () => {
                 <Card.Body>
                     <Card.Title>User Management</Card.Title>
                     <Card.Text>View, add, edit, or delete user accounts.</Card.Text>
-                    <Button variant="secondary">Go to User Management</Button>
+                    <Button variant="secondary" onClick={navigate("/usermanagement")} >Go to User Management</Button>
                 </Card.Body>
             </Card>
             <Card className="mb-3">
@@ -39,3 +44,5 @@ const AdminComponent = () => {
 }
 
 export default AdminComponent;
+
+

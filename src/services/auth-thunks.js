@@ -44,3 +44,10 @@ export const checkUsernameThunk = createAsyncThunk(
         return response.data;
     }
 );
+
+export const deleteUserThunk = createAsyncThunk(
+    'user/delete', async (user) => {
+        const response = await authService.deleteUser(user);
+        return response.data;
+    }
+);
