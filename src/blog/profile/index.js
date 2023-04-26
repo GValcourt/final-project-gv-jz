@@ -7,6 +7,8 @@ import { getUsersByPredThunk } from "../../services/user-thunks";
 import YourArticles from "../home-page/your-articles";
 import YourLikes from "./your-likes";
 import YourFollows from "./your-follows";
+import { findLocationbyPlaceID } from "../../services/location-service";
+import { checkLocationThunk } from "../../services/search-thunk";
 
 function ProfileComponent() {
     let params = useParams().uid
@@ -15,6 +17,9 @@ function ProfileComponent() {
     const [profile, setProfile] = useState({});
     const [follows, setFollows] = useState([]);
     const [loading,setLoading] = useState(true);
+    const [business, setBusiness] = useState({});
+    const [search, setSearch] = useState('');
+    const [results, setResults] = useState([]);
     //console.log(profile)
     const followUser = async () => {
         await followsService.userFollowsUser(currentUser._id, profile._id);
@@ -24,16 +29,25 @@ function ProfileComponent() {
         await followsService.userUnfollowsUser(currentUser._id, profile._id);
         setLoading(true)
       };
+    const checkLocation = async () => {
+        //console.log(search);
+        dispatch(checkLocationThunk({locationName: search})).then(result => {setResults([...results, ...result.payload.candidates]);
+        });
+    }
+    function removeResultfromState(place_id){
+        setResults(results.filter(location => location.place_id !== place_id))
+    }
     async function fetchData() {
         if (params === undefined) {
-            const { payload } = await dispatch(profileThunk());
+            await dispatch(profileThunk()).then(result=>{setProfile(result.payload);})
+            .then(await findLocationbyPlaceID(profile.business).then(res => {console.log(res); setBusiness(res);}));
             //console.log(payload);
-            setProfile(payload);
-            setLoading(false)
         }
         else{
-            await dispatch(getUsersByPredThunk(['_id', params])).then(result => {setProfile(result.payload[0])});
+            await dispatch(getUsersByPredThunk(['_id', params])).then(result => {setProfile(result.payload[0])})
+                .then(await findLocationbyPlaceID(profile.business).then(res => {console.log(res); setBusiness(res);}));
         }
+        setLoading(false)
         if (profile._id !== undefined){
             setLoading(true)
             let tempArray = await followsService.findFollowsByFollowerId(profile._id)
@@ -127,6 +141,21 @@ function ProfileComponent() {
                                                       setProfile(newProfile);
                                                   }}/>
                                     </div>
+                                    {profile.user_type === 'business' && business !== null&&
+                                    <div>
+                                        <div>
+                                        <label htmlFor="business" className="form-label mt-2">Business</label>
+                                        <input type="text" id="business" rows="3" value={business.locationName}
+                                                  onChange={(event) => {
+                                                      const newProfile = {
+                                                          ...profile,
+                                                          business: event.target.value,
+                                                      };
+                                                      setProfile(newProfile);
+                                                    }}/>
+                                        </div>
+                                    </div>
+                                    }
                                     { ((currentUser !== undefined && currentUser !== null) && currentUser._id === profile._id )&&
                                     <div className="d-flex mt-3">
                                         <div className="d-flex me-2">
