@@ -11,6 +11,7 @@ import YourFollows from "./your-follows";
 function ProfileComponent() {
     let params = useParams().uid
     const currentUser = useSelector(state => state.auth.currentUser);
+    const cuid = currentUser.id;
     //console.log("current user: ", currentUser);
     const [profile, setProfile] = useState({});
     const [follows, setFollows] = useState([]);
@@ -43,7 +44,7 @@ function ProfileComponent() {
     }
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const save = () => { dispatch(updateUserThunk(profile)); };
+    const save = () => { dispatch(updateUserThunk({id: cuid, user: profile})); };
     useEffect( () => {
         fetchData();
     }, [params]);

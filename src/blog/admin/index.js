@@ -18,10 +18,6 @@ const AdminComponent = () => {
         )
      }
 
-    const goToUM = () => {
-        navigate("/admin/usermanagement");
-    }
-
     return (
         <div className="container m-3">
             <h2 className="display-4 font-24">Admin Page</h2>
@@ -29,7 +25,9 @@ const AdminComponent = () => {
                 <Card.Body>
                     <Card.Title>User Management</Card.Title>
                     <Card.Text>View, add, edit, or delete user accounts.</Card.Text>
-                    <Button variant="secondary" onClick={navigate("/usermanagement")} >Go to User Management</Button>
+                    <a href="/user-management">
+                        <Button variant="secondary">Go to User Management</Button>
+                    </a>
                 </Card.Body>
             </Card>
             <Card className="mb-3">

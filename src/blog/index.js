@@ -44,7 +44,7 @@ function Blog() {
                   <Route path="login" element={<LoginComponent/>}/>
                   <Route path="register" element={<RegisterComponent/>}/>
                   <Route path="admin" element = {<AdminComponent/>}/>
-                  {/*<Route path="/user-management" element={<UserManagement/>}/>*/}
+                  <Route path="user-management" element={<UserManagement/>}/>
                 </Routes>
             {/*  </div>*/}
             {/*</div>*/}
