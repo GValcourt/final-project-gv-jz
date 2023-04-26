@@ -32,8 +32,9 @@ export const profile = async () => {
 };
 
 
-export const updateUser = async ({uid, user}) => {
-    const response = await api.put(`${USERS_URL}/${uid}`, user);
+export const updateUser = async (obj) => {
+    console.log(obj.uid)
+    const response = await api.put(`${USERS_URL}/${obj.uid}`, obj.user);
     return response.data;
 };
 
